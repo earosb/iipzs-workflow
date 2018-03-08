@@ -11,15 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'ObservationController@index')->name('home');
-Route::get('/profile/{user}', 'ProfileController@show')->name('profile');
-Route::resource('upload', 'UploadController', ['only' => ['store', 'destroy']]);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', 'ObservationController@index');
+    Route::get('/home', 'ObservationController@index')->name('home');
+    Route::get('/profile/{user}', 'ProfileController@show')->name('profile');
+    Route::resource('upload', 'UploadController', ['only' => ['store', 'destroy']]);
 
-Route::resource('observation', 'ObservationController');
-Route::resource('comment', 'CommentController', ['only' => ['store']]);
+    Route::resource('observation', 'ObservationController');
+    Route::resource('comment', 'CommentController', ['only' => ['store']]);
+});

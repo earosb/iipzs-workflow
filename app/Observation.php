@@ -37,7 +37,7 @@ class Observation extends Model
      *
      * @var array
      */
-    protected $fillable = ['type_id', 'title', 'content', 'user_id'];
+    protected $fillable = ['type_id', 'title', 'content', 'user_id', 'status_id'];
 
     /**
      * Tipo de observación
