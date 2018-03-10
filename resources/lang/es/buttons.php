@@ -17,6 +17,9 @@ return [
 
     'create' => 'Crear',
 
-    'cancel' => 'Cancelar'
+    'cancel' => 'Cancelar',
+
+    'subscribe'           => 'Suscribirme',
+    'cancel_subscription' => 'Cancelar suscripción',
 
 ];

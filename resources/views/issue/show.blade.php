@@ -110,21 +110,16 @@
 
                     <div class="panel-body">
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <img src="/images/avatar.png"
-                                     alt="Avatar"
-                                     width="25"
-                                     height="25"
-                                     class="mr-1">
-                                Cras justo odio
-                            </li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            @foreach($issue->subscribers as $subscriber)
+                                <li class="list-group-item">{{ $subscriber->name }}</li>
+                            @endforeach
                         </ul>
-
-                        <button class="btn btn-primary btn-block">Suscribir</button>
+                        {{--TODO Implementar suscripción y cancelar suscripción--}}
+                        {{--@if($issue->subscribers->contains(Auth::id()))--}}
+                            {{--<button class="btn btn-default btn-block">{{ __('buttons.cancel_subscription') }}</button>--}}
+                        {{--@else--}}
+                            {{--<button class="btn btn-primary btn-block">{{ __('buttons.subscribe') }}</button>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
             </div>
