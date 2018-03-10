@@ -36,4 +36,14 @@ class Type extends Model
     {
         return $this->hasMany(Observation::class);
     }
+
+    /**
+     * Notificar por defecto a los usuarios
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notifyByDefault()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
