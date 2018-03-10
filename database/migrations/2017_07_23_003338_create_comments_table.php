@@ -18,12 +18,12 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('immediate_action_id')->unsigned();
             $table->text('content');
-            $table->integer('observation_id')->unsigned();
+            $table->integer('issue_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('immediate_action_id')->references('id')->on('users');
-            $table->foreign('observation_id')->references('id')->on('observations');
+            $table->foreign('issue_id')->references('id')->on('issues');
         });
     }
 

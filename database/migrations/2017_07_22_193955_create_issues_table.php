@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateObservationsTable extends Migration
+class CreateIssuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateObservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('observations', function (Blueprint $table) {
+        Schema::create('issues', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('type_id')->unsigned();
             $table->string('title');
-            $table->text('content');
+            $table->text('description');
             $table->integer('user_id')->unsigned();
             $table->integer('status_id')->unsigned();
             $table->timestamps();
@@ -35,7 +35,6 @@ class CreateObservationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('observations');
-
+        Schema::dropIfExists('issues');
     }
 }

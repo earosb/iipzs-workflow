@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreObservation extends FormRequest
+class StoreIssue extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class StoreObservation extends FormRequest
     public function rules()
     {
         return [
-            'type'       => 'exists:types,id',
-            'title'      => 'required',
-            'content'    => 'required',
-            'attachment' => 'file',
+            'type'        => 'exists:types,id',
+            'title'       => 'required',
+            'description' => 'required',
+            'attachment'  => 'file',
         ];
     }
 }

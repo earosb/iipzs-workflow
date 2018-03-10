@@ -8,7 +8,7 @@
                     Observaciones
                 @endslot
 
-                <form class="form-horizontal" method="POST" action="{{ route('observation.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('issue.store') }}">
                     {{ csrf_field() }}
 
                     <div class="form-group {{ $errors->has('type') ? 'has-error' : ''}}">
@@ -39,12 +39,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group {{ $errors->has('content') ? 'has-error' : ''}}">
-                        <label for="content" class="col-md-4 control-label">Descripción</label>
+                    <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
+                        <label for="description" class="col-md-4 control-label">Descripción</label>
                         <div class="col-md-6">
-                            <textarea name="content" id="content" class="form-control" cols="30"
-                                      rows="10">{{ old('content') }}</textarea>
-                            {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
+                            <textarea name="description" id="description" class="form-control" cols="30"
+                                      rows="10">{{ old('description') }}</textarea>
+                            {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
 
