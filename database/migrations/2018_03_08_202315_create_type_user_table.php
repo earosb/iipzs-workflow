@@ -15,14 +15,11 @@ class CreateTypeUserTable extends Migration
     {
         Schema::create('type_user', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('type_id')->unsigned();
+            $table->integer('user_id')->unsigned();
 
-            $table->integer('type_id')->unsigned()->nullable();
-            $table->foreign('type_id')->references('id')
-                ->on('types');
-
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')
-                ->on('users');
+            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

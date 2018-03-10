@@ -53,11 +53,11 @@ class IssueController extends Controller
     public function store(StoreIssue $request)
     {
         $issue = Issue::create([
-            'user_id'   => Auth::user()->id,
-            'type_id'   => $request->input('type'),
-            'status_id' => Status::whereName('new')->first()->id,
-            'title'     => $request->input('title'),
-            'content'   => $request->input('content')
+            'user_id'     => Auth::user()->id,
+            'type_id'     => $request->input('type'),
+            'status_id'   => Status::whereName('new')->first()->id,
+            'title'       => $request->input('title'),
+            'description' => $request->input('description')
         ]);
 
         if ($request->has('attachment')) {

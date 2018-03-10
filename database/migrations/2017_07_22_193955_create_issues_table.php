@@ -35,7 +35,6 @@ class CreateIssuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('observations');
-
+        Schema::dropIfExists('issues');
     }
 }
