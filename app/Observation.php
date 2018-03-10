@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\ObservationCreated;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -38,6 +39,15 @@ class Observation extends Model
      * @var array
      */
     protected $fillable = ['type_id', 'title', 'content', 'user_id', 'status_id'];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ObservationCreated::class,
+    ];
 
     /**
      * Tipo de observación

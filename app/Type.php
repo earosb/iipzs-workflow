@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Type whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Type whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $notifyByDefault
  */
 class Type extends Model
 {
