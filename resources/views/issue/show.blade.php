@@ -12,6 +12,24 @@
                         <h5>{{ $issue->created_at->format('d-m-Y h:m') }}</h5>
 
                         <p>{{ $issue->description }}</p>
+
+                        <ul class="list-group">
+                            @foreach($issue->attachments as $attachment)
+                                <li class="list-group-item">
+                                    @if($attachment->mime_type == 'image/jpeg')
+                                        <i class="glyphicon glyphicon-picture"></i>
+                                    @elseif($attachment->mime_type == 'application/pdf')
+                                        <i class="glyphicon glyphicon-file"></i>
+                                    @elseif($attachment->mime_type == 'application/pdf')
+                                        <i class="glyphicon glyphicon-facetime-video"></i>
+                                    @else
+                                        <i class="glyphicon glyphicon-file"></i>
+                                    @endif
+                                    <a href="/{{ $attachment->path }}" target="_blank"> {{ $attachment->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+
                     </div>
                 </div>
                 @foreach($issue->comments as $comment)
@@ -110,9 +128,11 @@
 
                     <div class="panel-body">
                         <ul class="list-group">
-                            @foreach($issue->subscribers as $subscriber)
+                            @forelse($issue->subscribers as $subscriber)
                                 <li class="list-group-item">{{ $subscriber->name }}</li>
-                            @endforeach
+                            @empty
+                                    <li class="list-group-item">No hay usuarios suscritos</li>
+                            @endforelse
                         </ul>
                         {{--TODO Implementar suscripción y cancelar suscripción--}}
                         {{--@if($issue->subscribers->contains(Auth::id()))--}}

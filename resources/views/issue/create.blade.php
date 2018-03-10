@@ -8,7 +8,7 @@
                     Observaciones
                 @endslot
 
-                <form class="form-horizontal" method="POST" action="{{ route('issue.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('issue.store') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group {{ $errors->has('type') ? 'has-error' : ''}}">
@@ -51,7 +51,7 @@
                     <div class="form-group {{ $errors->has('attachment') ? 'has-error' : ''}}">
                         <label for="attachment" class="col-md-4 control-label">Adjuntar archivo</label>
                         <div class="col-md-6">
-                            <input id="attachment" type="file" class="form-control">
+                            <input name="attachment" id="attachment" type="file" class="form-control">
                             {!! $errors->first('attachment', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>

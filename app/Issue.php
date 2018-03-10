@@ -98,10 +98,10 @@ class Issue extends Model
     }
 
     /**
-     * Get all of the comment's attachments.
+     * Get all of the issues attachments.
      */
     public function attachments()
     {
-        return $this->morphMany('App\Issue', 'attachable');
+        return $this->morphMany('App\Attachment', 'attachable');
     }
 }
