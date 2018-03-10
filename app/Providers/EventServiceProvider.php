@@ -13,9 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\ObservationReceivedNewComment' => [
-            'App\Listeners\NotifyImmediateAction',
-            'App\Listeners\NotifySubscribers',
+        'App\Events\ObservationCreated' => [
+            'App\Listeners\SendNewObservationNotification'
         ],
     ];
 

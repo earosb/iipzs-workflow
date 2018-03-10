@@ -11,15 +11,22 @@ use Auth;
 
 class ObservationController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-        $observations = Observation::withCount('comments')->orderBy('created_at')->paginate(20);
+        $observations = Observation::withCount('comments')->orderBy('updated_at', 'desc')->paginate(20);
 
         flash('Observaciones cargadas', 'info');
 
         return view('observation.index', compact('observations'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         $observation = Observation::find($id)->load(['user', 'comments']);
@@ -29,6 +36,9 @@ class ObservationController extends Controller
         return view('observation.show', compact('observation', 'users'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $types = Type::all(['id', 'name']);
@@ -36,6 +46,10 @@ class ObservationController extends Controller
         return view('observation.create', compact('types'));
     }
 
+    /**
+     * @param StoreObservation $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(StoreObservation $request)
     {
         $observation = Observation::create([
