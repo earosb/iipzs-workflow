@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreObservation;
-use App\Observation;
+use App\Http\Requests\StoreIssue;
+use App\Issue;
 use App\Status;
 use App\Type;
 use App\User;
 use Auth;
 
-class ObservationController extends Controller
+class IssueController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $observations = Observation::withCount('comments')->orderBy('updated_at', 'desc')->paginate(20);
+        $issues = Issue::withCount('comments')->orderBy('updated_at', 'desc')->paginate(20);
 
         flash('Observaciones cargadas', 'info');
 
-        return view('observation.index', compact('observations'));
+        return view('issue.index', compact('issues'));
     }
 
     /**
@@ -29,11 +29,11 @@ class ObservationController extends Controller
      */
     public function show($id)
     {
-        $observation = Observation::find($id)->load(['user', 'comments']);
+        $issue = Issue::find($id)->load(['user', 'comments']);
 
         $users = User::all('name AS label', 'id AS value')->whereNotIn('id', Auth()->id());
 
-        return view('observation.show', compact('observation', 'users'));
+        return view('issue.show', compact('issue', 'users'));
     }
 
     /**
@@ -43,16 +43,16 @@ class ObservationController extends Controller
     {
         $types = Type::all(['id', 'name']);
 
-        return view('observation.create', compact('types'));
+        return view('issue.create', compact('types'));
     }
 
     /**
-     * @param StoreObservation $request
+     * @param StoreIssue $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreObservation $request)
+    public function store(StoreIssue $request)
     {
-        $observation = Observation::create([
+        $issue = Issue::create([
             'user_id'   => Auth::user()->id,
             'type_id'   => $request->input('type'),
             'status_id' => Status::whereName('new')->first()->id,
@@ -61,13 +61,13 @@ class ObservationController extends Controller
         ]);
 
         if ($request->has('attachment')) {
-            $observation->attachments()->create([
+            $issue->attachments()->create([
                 'name'      => $request->attachment->getClientOriginalName(),
                 'mime_type' => $request->attachment->getClientMimeType(),
                 'path'      => $request->attachment->store('attachments', 'public')
             ]);
         }
 
-        return redirect()->route('observation.index');
+        return redirect()->route('issue.index');
     }
 }

@@ -2,29 +2,29 @@
 
 namespace App\Events;
 
-use App\Observation;
+use App\Issue;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ObservationCreated
+class IssueCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var Observation
+     * @var Issue
      */
-    public $observation;
+    public $issue;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Observation $observation)
+    public function __construct(Issue $issue)
     {
-        $this->observation = $observation;
+        $this->issue = $issue;
     }
 
     /**
@@ -34,6 +34,6 @@ class ObservationCreated
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('observations');
+        return new PrivateChannel('issues');
     }
 }

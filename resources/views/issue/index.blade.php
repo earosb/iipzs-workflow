@@ -15,22 +15,22 @@
                         <th>Estado</th>
                         <th>Creado por</th>
                         <th>Fecha <span class="glyphicon glyphicon-triangle-bottom"></span></th>
-                        <th class="text-center"><span class="glyphicon glyphicon-comment"></span></th>
+                        <th><span class="glyphicon glyphicon-comment"></span></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse($observations as $observation)
+                    @forelse($issues as $issue)
                         <tr>
                             <td>
-                                <a href="{{ route('observation.show', $observation->id) }}">#{{ $observation->id }} {{ $observation->title }}</a>
+                                <a href="{{ route('issue.show', $issue->id) }}">#{{ $issue->id }} {{ $issue->title }}</a>
                             </td>
                             <td>
                                 <app-label
-                                        color="{{ $observation->status->class }}">{{ $observation->status->name }}</app-label>
+                                        color="{{ $issue->status->class }}">{{ __("status.{$issue->status->name}") }}</app-label>
                             </td>
-                            <td>{{ $observation->user->name }}</td>
-                            <td>{{ $observation->created_at->diffForHumans() }}</td>
-                            <td><span class="badge">{{ $observation->comments_count }}</span></td>
+                            <td>{{ $issue->user->name }}</td>
+                            <td>{{ $issue->created_at->diffForHumans() }}</td>
+                            <td><span class="badge">{{ $issue->comments_count }}</span></td>
                         </tr>
                     @empty
                         <tr>
@@ -40,7 +40,7 @@
                     </tbody>
                 </table>
                 <div>
-                    {{ $observations->links() }}
+                    {{ $issues->links() }}
                 </div>
             @endcomponent
         </div>

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Observation[] $observations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Issue[] $observations
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Type whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Type whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Type whereName($value)
@@ -33,15 +33,15 @@ class Type extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function observations()
+    public function issue()
     {
-        return $this->hasMany(Observation::class);
+        return $this->hasMany(Issue::class);
     }
 
     /**
      * Notificar por defecto a los usuarios
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function notifyByDefault()
     {

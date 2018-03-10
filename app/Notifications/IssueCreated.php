@@ -2,29 +2,29 @@
 
 namespace App\Notifications;
 
-use App\Observation;
+use App\Issue;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ObservationCreated extends Notification
+class IssueCreated extends Notification
 {
     use Queueable;
 
     /**
-     * @var Observation
+     * @var Issue
      */
-    protected $observation;
+    protected $issue;
 
     /**
      * Create a new notification instance.
      *
-     * @param Observation $observation
+     * @param Issue $issue
      */
-    public function __construct(Observation $observation)
+    public function __construct(Issue $issue)
     {
-        $this->observation = $observation;
+        $this->issue = $issue;
     }
 
     /**
@@ -48,9 +48,9 @@ class ObservationCreated extends Notification
     {
         return (new MailMessage)
             ->greeting("Hola {$notifiable->name}")
-            ->subject("[iipzs] #{$this->observation->id} {$this->observation->title}")
-            ->line($this->observation->content)
-            ->action('Ver detalles', route('observation.show', $this->observation->id, true))
+            ->subject("[iipzs] #{$this->issue->id} {$this->issue->title}")
+            ->line($this->issue->content)
+            ->action('Ver detalles', route('issue.show', $this->issue->id, true))
             ->line('Gracias por usar nuestra aplicación!')
             ->salutation('Saludos');
     }

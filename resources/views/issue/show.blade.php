@@ -5,16 +5,16 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ $observation->title }}</div>
+                    <div class="panel-heading">{{ $issue->title }}</div>
 
                     <div class="panel-body">
-                        <h4>{{ $observation->user->name }}</h4>
-                        <h5>{{ $observation->created_at->format('d-m-Y h:m') }}</h5>
+                        <h4>{{ $issue->user->name }}</h4>
+                        <h5>{{ $issue->created_at->format('d-m-Y h:m') }}</h5>
 
-                        <p>{{ $observation->content }}</p>
+                        <p>{{ $issue->description }}</p>
                     </div>
                 </div>
-                @foreach($observation->comments as $comment)
+                @foreach($issue->comments as $comment)
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4>{{ $comment->user->name }}</h4>
@@ -50,7 +50,7 @@
                         <form method="POST" action="{{ route('comment.store') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            <input type="hidden" name="observation" value="{{ $observation->id }}">
+                            <input type="hidden" name="observation" value="{{ $issue->id }}">
 
                             <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                 <label for="comment" class="sr-only">{{ __('labels.comment') }}</label>

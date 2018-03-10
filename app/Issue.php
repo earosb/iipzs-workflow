@@ -2,11 +2,11 @@
 
 namespace App;
 
-use App\Events\ObservationCreated;
+use App\Events\IssueCreated;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Observation
+ * App\Issue
  *
  * @property int $id
  * @property int $type_id
@@ -17,28 +17,28 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\Type $type
  * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereUserId($value)
  * @mixin \Eloquent
  * @property-read \App\Status $status
  * @property int $status_id
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Observation[] $attachments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Issue[] $attachments
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Observation whereStatusId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereStatusId($value)
  */
-class Observation extends Model
+class Issue extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['type_id', 'title', 'content', 'user_id', 'status_id'];
+    protected $fillable = ['type_id', 'title', 'description', 'user_id', 'status_id'];
 
     /**
      * The event map for the model.
@@ -46,7 +46,7 @@ class Observation extends Model
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => ObservationCreated::class,
+        'created' => IssueCreated::class,
     ];
 
     /**
@@ -94,6 +94,6 @@ class Observation extends Model
      */
     public function attachments()
     {
-        return $this->morphMany('App\Observation', 'attachable');
+        return $this->morphMany('App\Issue', 'attachable');
     }
 }

@@ -16,26 +16,26 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'name'           => $faker->name,
+        'email'          => $faker->unique()->safeEmail,
+        'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Observation::class, function (Faker\Generator $faker) {
+$factory->define(App\Issue::class, function (Faker\Generator $faker) {
 
     $type = \App\Type::inRandomOrder()->first();
     $user = \App\User::inRandomOrder()->first();
     $status = \App\Status::inRandomOrder()->first();
 
     return [
-        'type_id' => $type->id,
-        'title' => $faker->sentence,
-        'content' => $faker->text,
-        'user_id' => $user->id,
-        'status_id' => $status->id,
+        'type_id'     => $type->id,
+        'title'       => $faker->sentence,
+        'description' => $faker->text,
+        'user_id'     => $user->id,
+        'status_id'   => $status->id,
     ];
 });
 
