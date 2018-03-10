@@ -80,6 +80,14 @@ class Issue extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function subscribers()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
      * Comentarios de una observación
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

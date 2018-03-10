@@ -52,9 +52,12 @@ class IssueController extends Controller
      */
     public function store(StoreIssue $request)
     {
+        /** @var Type $type */
+        $type = Type::findOrFail($request->input('type'));
+
         $issue = Issue::create([
             'user_id'     => Auth::user()->id,
-            'type_id'     => $request->input('type'),
+            'type_id'     => $type->id,
             'status_id'   => Status::whereName('new')->first()->id,
             'title'       => $request->input('title'),
             'description' => $request->input('description')
@@ -68,6 +71,8 @@ class IssueController extends Controller
             ]);
         }
 
-        return redirect()->route('issue.index');
+        $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
+
+        return redirect()->route('issue.shoe', $issue->id);
     }
 }
