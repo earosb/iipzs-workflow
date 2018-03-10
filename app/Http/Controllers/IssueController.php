@@ -73,6 +73,6 @@ class IssueController extends Controller
 
         $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
 
-        return redirect()->route('issue.shoe', $issue->id);
+        return redirect()->route('issue.show', $issue->id);
     }
 }
