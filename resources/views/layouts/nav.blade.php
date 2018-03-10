@@ -34,6 +34,14 @@
                 <li>
                     <a href="/observation/create">Nueva observación</a>
                 </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Mantenedores <span class="caret"></span></a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('type.index') }}">Tipos</a></li>
+                    </ul>
+                </li>
 
             </ul>
             @endauth

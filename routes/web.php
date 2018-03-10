@@ -21,4 +21,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('observation', 'ObservationController');
     Route::resource('comment', 'CommentController', ['only' => ['store']]);
+    Route::resource('type', 'TypeController');
 });
