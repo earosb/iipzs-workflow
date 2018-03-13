@@ -52,6 +52,8 @@ $factory->define(App\Status::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     $user = \App\User::inRandomOrder()->first();
-    $immediate_action = \App\User::inRandomOrder()->first();
-    return ['content' => $faker->text, 'user_id' => $user->id, 'immediate_action_id' => $immediate_action->id];
+    return [
+        'created_by'  => $user->id,
+        'description' => $faker->text,
+    ];
 });

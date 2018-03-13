@@ -24,12 +24,12 @@ class IssueController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Issue $issue
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Issue $issue)
     {
-        $issue = Issue::find($id)->load(['user', 'comments']);
+        $issue->load(['user', 'comments.createdBy', 'comments.issue']);
 
         $users = User::all('name AS label', 'id AS value')->whereNotIn('id', Auth()->id());
 
