@@ -30,6 +30,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Issue[] $attachments
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereStatusId($value)
+ * @property string $description
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $subscribers
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereDescription($value)
  */
 class Issue extends Model
 {
@@ -47,6 +50,16 @@ class Issue extends Model
      */
     protected $dispatchesEvents = [
         'created' => IssueCreated::class,
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at'
     ];
 
     /**

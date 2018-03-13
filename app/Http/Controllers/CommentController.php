@@ -3,40 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\Events\ObservationReceivedNewComment;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreComment;
+use App\Issue;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
+
+    /**
+     * @param StoreComment $request
+     * @param Issue $issue
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(StoreComment $request, Issue $issue)
     {
-        return dd($request->all());
-        $this->validate($request, [
-            'comment'          => 'required',
-            'observation'      => 'required|exists:observations,id',
-            'immediate_action' => 'exists:users,id',
-        ]);
-
         $comment = Comment::create([
-            'user_id'             => Auth::user()->id,
-            'immediate_action_id' => $request->has('immediate_action') ? $request->input('immediate_action') : null,
-            'observation_id'      => $request->input('observation'),
-            'content'             => $request->input('comment')
+            'created_by'  => Auth::user()->id,
+            'issue_id'    => $issue->id,
+            'description' => $request->input('description')
         ]);
 
-        if ($request->has('attachments')) {
-            foreach ($request->attachments as $attachment) {
-                $attach = json_decode($attachment, true);
-                $comment->attachments()->create($attach);
-            }
+//        if ($request->has('attachments')) {
+//            foreach ($request->attachments as $attachment) {
+//                $attach = json_decode($attachment, true);
+//                $comment->attachments()->create($attach);
+//            }
+//        }
+
+        if ($request->has('attachment')) {
+            $comment->attachments()->create([
+                'name'      => $request->attachment->getClientOriginalName(),
+                'mime_type' => $request->attachment->getClientMimeType(),
+                'path'      => $request->attachment->store('attachments', 'public')
+            ]);
         }
 
-//        if ($request->has('immediate_action'))
-//            event(new ImmediateActionEvent::class)
+        if (!$issue->subscribers->contains(Auth::user()->id))
+            $issue->subscribers()->attach(Auth::user()->id);
 
-        event(new ObservationReceivedNewComment($comment));
-
-        return redirect()->route('observation.show', $request->input('observation'));
+        return redirect()->route('issue.show', $issue->id);
     }
 }

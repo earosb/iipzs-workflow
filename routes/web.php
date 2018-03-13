@@ -14,12 +14,12 @@
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', 'IssueController@index');
+    Route::redirect('/', '/home', 301);
     Route::get('/home', 'IssueController@index')->name('home');
     Route::get('/profile/{user}', 'ProfileController@show')->name('profile');
     Route::resource('upload', 'UploadController', ['only' => ['store', 'destroy']]);
 
     Route::resource('issue', 'IssueController');
-    Route::resource('comment', 'CommentController', ['only' => ['store']]);
+    Route::resource('issue/{issue}/comment', 'CommentController', ['only' => ['store']]);
     Route::resource('type', 'TypeController');
 });

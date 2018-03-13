@@ -14,7 +14,7 @@ return [
     'password' => 'Contraseña',
     'remember' => 'Recordar',
 
-    'comment' => 'Comentario',
+    'description' => 'Descripción',
     'immediate_action' => 'Asignar acción inmediata',
 
 ];

@@ -8,36 +8,55 @@ use Illuminate\Database\Eloquent\Model;
  * App\Comment
  *
  * @property int $id
- * @property int $user_id
- * @property string $content
- * @property int $observation_id
+ * @property int $created_by
+ * @property string $description
+ * @property int $issue_id
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Attachment[] $attachments
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereContent($value)
+ * @property-read \App\User $createdBy
+ * @property-read \App\Issue $issue
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereObservationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereIssueId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereUserId($value)
  * @mixin \Eloquent
- * @property int $immediate_action_id
- * @property-read \App\User $immediateAction
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereImmediateActionId($value)
  */
 class Comment extends Model
 {
-    protected $fillable = ['user_id', 'immediate_action_id', 'observation_id', 'content'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['created_by', 'description', 'issue_id'];
 
-    public function user()
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\User', 'created_by');
     }
 
-    public function immediateAction()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function issue()
     {
-        return $this->belongsTo(User::class, 'immediate_action_id');
+        return $this->belongsTo('App\Issue');
     }
 
     /**
