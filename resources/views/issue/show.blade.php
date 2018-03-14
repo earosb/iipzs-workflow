@@ -65,7 +65,8 @@
                 <div class="panel panel-default" id="comment-form">
                     <div class="panel-body">
 
-                        <form method="POST" action="{{ route('comment.store', $issue->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('comment.store', $issue->id) }}"
+                              enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
@@ -89,18 +90,18 @@
                                 <button class="btn btn-primary">{{ __('buttons.comment') }}</button>
 
                                 {{--<div class="btn-group">--}}
-                                    {{--<button class="btn btn-primary">{{ __('buttons.comment') }}</button>--}}
-                                    {{--<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"--}}
-                                            {{--aria-haspopup="true" aria-expanded="false">--}}
-                                        {{--<span class="caret"></span>--}}
-                                        {{--<span class="sr-only">Toggle Dropdown</span>--}}
-                                    {{--</button>--}}
-                                    {{--<ul class="dropdown-menu">--}}
-                                        {{--<li><a href="#">Cerrar</a></li>--}}
-                                        {{--<li><a href="#">Anular</a></li>--}}
-                                        {{--<li role="separator" class="divider"></li>--}}
-                                        {{--<li><a href="#">Eliminar</a></li>--}}
-                                    {{--</ul>--}}
+                                {{--<button class="btn btn-primary">{{ __('buttons.comment') }}</button>--}}
+                                {{--<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"--}}
+                                {{--aria-haspopup="true" aria-expanded="false">--}}
+                                {{--<span class="caret"></span>--}}
+                                {{--<span class="sr-only">Toggle Dropdown</span>--}}
+                                {{--</button>--}}
+                                {{--<ul class="dropdown-menu">--}}
+                                {{--<li><a href="#">Cerrar</a></li>--}}
+                                {{--<li><a href="#">Anular</a></li>--}}
+                                {{--<li role="separator" class="divider"></li>--}}
+                                {{--<li><a href="#">Eliminar</a></li>--}}
+                                {{--</ul>--}}
                                 {{--</div>--}}
 
                                 <button class="btn btn-link" type="reset">
@@ -124,12 +125,16 @@
                                 <li class="list-group-item">No hay usuarios suscritos</li>
                             @endforelse
                         </ul>
-                        {{--TODO Implementar suscripción y cancelar suscripción--}}
-                        {{--@if($issue->subscribers->contains(Auth::id()))--}}
-                        {{--<button class="btn btn-default btn-block">{{ __('buttons.cancel_subscription') }}</button>--}}
-                        {{--@else--}}
-                        {{--<button class="btn btn-primary btn-block">{{ __('buttons.subscribe') }}</button>--}}
-                        {{--@endif--}}
+                        <form method="POST" action="{{ route('toggle-subscription', $issue->id) }}">
+                            {{ csrf_field() }}
+                            @if($issue->subscribers->contains(Auth::id()))
+                                <button type="submit"
+                                        class="btn btn-default btn-block">{{ __('buttons.cancel_subscription') }}</button>
+                            @else
+                                <button type="submit"
+                                        class="btn btn-primary btn-block">{{ __('buttons.subscribe') }}</button>
+                            @endif
+                        </form>
                     </div>
                 </div>
             </div>

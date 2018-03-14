@@ -22,4 +22,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('issue', 'IssueController');
     Route::resource('issue/{issue}/comment', 'CommentController', ['only' => ['store']]);
     Route::resource('type', 'TypeController');
+    Route::post('issue/{issue}/toggle-subscription', 'ToggleSubscriptionController')->name('toggle-subscription');
 });
