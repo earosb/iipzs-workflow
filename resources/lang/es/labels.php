@@ -10,11 +10,13 @@ return [
     |
     */
 
-    'email' => 'Correo electrónico',
+    'email'    => 'Correo electrónico',
     'password' => 'Contraseña',
     'remember' => 'Recordar',
 
-    'description' => 'Descripción',
+    'description'      => 'Descripción',
     'immediate_action' => 'Asignar acción inmediata',
+
+    'name' => 'Nombre',
 
 ];

@@ -50,6 +50,7 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('type.index') }}">Tipos</a></li>
+                            <li><a href="{{ route('user.index') }}">Usuarios</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
