@@ -41,7 +41,7 @@ class Issue extends Model
      *
      * @var array
      */
-    protected $fillable = ['type_id', 'title', 'description', 'user_id', 'status_id'];
+    protected $fillable = ['type_id', 'title', 'description', 'created_by', 'status_id'];
 
     /**
      * The event map for the model.
@@ -77,9 +77,9 @@ class Issue extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     /**

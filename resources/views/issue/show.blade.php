@@ -8,7 +8,7 @@
                     <div class="panel-heading">{{ $issue->title }}</div>
 
                     <div class="panel-body">
-                        <h4>{{ $issue->user->name }}
+                        <h4>{{ $issue->createdBy->name }}
                             <small>{{ $issue->created_at->format('d-m-Y h:m') }}</small>
                         </h4>
 

@@ -29,7 +29,7 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        $issue->load(['user', 'comments.createdBy', 'comments.issue']);
+        $issue->load(['createdBy', 'comments.createdBy', 'comments.issue']);
 
         $users = User::all('name AS label', 'id AS value')->whereNotIn('id', Auth()->id());
 
@@ -56,7 +56,7 @@ class IssueController extends Controller
         $type = Type::findOrFail($request->input('type'));
 
         $issue = Issue::create([
-            'user_id'     => Auth::user()->id,
+            'created_by'  => Auth::user()->id,
             'type_id'     => $type->id,
             'status_id'   => Status::whereName('new')->first()->id,
             'title'       => $request->input('title'),

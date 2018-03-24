@@ -34,7 +34,7 @@ $factory->define(App\Issue::class, function (Faker\Generator $faker) {
         'type_id'     => $type->id,
         'title'       => $faker->sentence,
         'description' => $faker->text,
-        'user_id'     => $user->id,
+        'created_by'  => $user->id,
         'status_id'   => $status->id,
     ];
 });
