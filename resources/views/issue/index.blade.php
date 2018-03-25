@@ -14,6 +14,7 @@
                         <th>Título</th>
                         <th>Estado</th>
                         <th>Creado por</th>
+                        <th>Acción inmediata</th>
                         <th>Fecha <span class="glyphicon glyphicon-triangle-bottom"></span></th>
                         <th><span class="glyphicon glyphicon-comment"></span></th>
                     </tr>
@@ -28,7 +29,8 @@
                                 <app-label
                                         color="{{ $issue->status->class }}">{{ __("status.{$issue->status->name}") }}</app-label>
                             </td>
-                            <td>{{ $issue->user->name }}</td>
+                            <td>{{ $issue->createdBy->name }}</td>
+                            <td>{{ $issue->assignedTo->name }}</td>
                             <td>{{ $issue->created_at->diffForHumans() }}</td>
                             <td><span class="badge">{{ $issue->comments_count }}</span></td>
                         </tr>

@@ -56,6 +56,23 @@
                         </div>
                     </div>
 
+                    <div class="form-group {{ $errors->has('assigned_to') ? 'has-error' : ''}}">
+                        <label for="assigned_to" class="col-md-4 control-label">Acción inmediata</label>
+                        <div class="col-md-6">
+                            <select name="assigned_to" id="assigned_to" class="form-control">
+                                <option selected>Seleccione usuario</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('assigned_to'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('assigned_to') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-md-4 pull-right">
                             <input type="submit" class="btn btn-primary" value="Guardar">

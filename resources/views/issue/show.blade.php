@@ -8,7 +8,7 @@
                     <div class="panel-heading">{{ $issue->title }}</div>
 
                     <div class="panel-body">
-                        <h4>{{ $issue->user->name }}
+                        <h4>{{ $issue->createdBy->name }}
                             <small>{{ $issue->created_at->format('d-m-Y h:m') }}</small>
                         </h4>
 
@@ -114,6 +114,26 @@
                 </div>
             </div>
             <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-6">Acción inmediata</div>
+                            <div class="col-sm-6">{{ $issue->assignedTo->name }}</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-6">Tipo</div>
+                            <div class="col-sm-6">{{ $issue->type->name }}</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-6">Estado</div>
+                            <div class="col-sm-6">{{ $issue->status->name }}</div>
+                        </div>
+                    </li>
+                </ul>
                 <div class="panel panel-default">
                     <div class="panel-heading">Usuarios suscritos</div>
 
