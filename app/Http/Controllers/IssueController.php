@@ -42,8 +42,9 @@ class IssueController extends Controller
     public function create()
     {
         $types = Type::all(['id', 'name']);
+        $users = User::all(['id', 'name']);
 
-        return view('issue.create', compact('types'));
+        return view('issue.create', compact('types', 'users'));
     }
 
     /**
@@ -57,6 +58,7 @@ class IssueController extends Controller
 
         $issue = Issue::create([
             'created_by'  => Auth::user()->id,
+            'assigned_to' => $request->input('assigned_to'),
             'type_id'     => $type->id,
             'status_id'   => Status::whereName('new')->first()->id,
             'title'       => $request->input('title'),

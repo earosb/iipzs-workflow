@@ -19,11 +19,13 @@ class CreateIssuesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('created_by')->unsigned();
+            $table->integer('assigned_to')->unsigned();
             $table->integer('status_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('assigned_to')->references('id')->on('users');
             $table->foreign('status_id')->references('id')->on('status');
         });
     }

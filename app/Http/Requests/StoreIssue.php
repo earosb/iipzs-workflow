@@ -28,6 +28,7 @@ class StoreIssue extends FormRequest
             'title'       => 'required',
             'description' => 'required',
             'attachment'  => 'file',
+            'assigned_to' => 'required|exists:users,id'
         ];
     }
 }
