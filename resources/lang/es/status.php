@@ -12,5 +12,7 @@ return [
 
     'new' => 'Nuevo',
     'open' => 'Abierto',
+    'resolved' => 'Resuelto',
+    'closed' => 'Cerrado',
 
 ];
