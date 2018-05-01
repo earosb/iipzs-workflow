@@ -8,24 +8,38 @@
                     Usuarios
                 @endslot
 
-                <form class="form-horizontal" method="POST" action="{{ route('user.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('register', $invite->token) }}">
                     {{ csrf_field() }}
 
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-                        <label for="name" class="col-md-4 control-label">{{ __('labels.name') }}</label>
+                        <label class="col-md-4 control-label">{{ __('labels.name') }}</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
-                                   autofocus>
-                            {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+                            <p class="form-control-static">{{ $invite->name }}</p>
                         </div>
                     </div>
 
                     <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
-                        <label for="email" class="col-md-4 control-label">{{ __('labels.email') }}</label>
+                        <label class="col-md-4 control-label">{{ __('labels.email') }}</label>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}"
-                                   autofocus>
-                            {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
+                            <p class="form-control-static">{{ $invite->email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password" class="col-md-4 control-label">Contraseña</label>
+
+                        <div class="col-md-6">
+                            <input id="password" type="password" class="form-control" name="password" required>
+                            {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password-confirm" class="col-md-4 control-label">Confirmar contraseña</label>
+
+                        <div class="col-md-6">
+                            <input id="password-confirm" type="password" class="form-control"
+                                   name="password_confirmation" required>
                         </div>
                     </div>
 

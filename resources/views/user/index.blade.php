@@ -8,8 +8,10 @@
                     Usuarios
                 @endslot
 
+                @include('flash::message')
+
                 <div class="pull-right">
-                    <a href="{{ route('user.create') }}" class="btn btn-default">{{ __('buttons.create') }}</a>
+                    <a href="{{ route('invite') }}" class="btn btn-default">{{ __('buttons.create') }}</a>
                 </div>
 
                 <table class="table table-condensed table-hover">
@@ -32,15 +34,15 @@
                             <td class="text-right">
                                 <a href="{{ route('password.request') }}" class="btn btn-sm btn-default"><span
                                             class="glyphicon glyphicon-edit"></span></a>
-                                <form method="POST" action="{{ route('user.destroy', $user->id) }}"
-                                      style="display:inline">
-                                    {{ csrf_field() }}
-                                    <input name="_method" value="DELETE" type="hidden">
-                                    <button class="btn btn-sm btn-danger" type="submit">
-                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"
-                                              title="Eliminar"></span>
-                                    </button>
-                                </form>
+                                {{--<form method="POST" action="{{ route('user.destroy', $user->id) }}"--}}
+                                      {{--style="display:inline">--}}
+                                    {{--{{ csrf_field() }}--}}
+                                    {{--<input name="_method" value="DELETE" type="hidden">--}}
+                                    {{--<button class="btn btn-sm btn-danger" type="submit">--}}
+                                        {{--<span class="glyphicon glyphicon-trash" aria-hidden="true"--}}
+                                              {{--title="Eliminar"></span>--}}
+                                    {{--</button>--}}
+                                {{--</form>--}}
                             </td>
                         </tr>
                     @endforeach
