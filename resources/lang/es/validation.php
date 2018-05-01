@@ -119,7 +119,7 @@ return [
 
     'attributes' => [
         'email' => 'Correo electrónico',
-        'password' => 'Correo electrónico',
+        'password' => 'Contraseña',
     ],
 
 ];
