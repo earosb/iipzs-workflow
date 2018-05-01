@@ -4,23 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreIssue;
 use App\Issue;
+use App\Search\Issue\IssueSearch;
 use App\Status;
 use App\Type;
 use App\User;
 use Auth;
+use Illuminate\Http\Request;
 
 class IssueController extends Controller
 {
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $issues = Issue::withCount('comments')->orderBy('updated_at', 'desc')->paginate(20);
+        $states = Status::all(['id', 'name']);
 
-        flash('Observaciones cargadas', 'info');
+        $users = User::all(['id', 'name']);
 
-        return view('issue.index', compact('issues'));
+        $issues = IssueSearch::apply($request)->appends($request->except(['page']));
+
+        return view('issue.index', compact('states', 'users', 'issues'));
     }
 
     /**
