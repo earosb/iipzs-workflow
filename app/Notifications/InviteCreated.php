@@ -2,15 +2,16 @@
 
 namespace App\Notifications;
 
+use App\Invite;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
-class ResetPassword extends ResetPasswordNotification
+class InviteCreated extends Notification
 {
     use Queueable;
+
 
     /**
      * Get the notification's delivery channels.
@@ -32,11 +33,11 @@ class ResetPassword extends ResetPasswordNotification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->greeting("Hola, {$notifiable->name}")
-            ->subject('¿Olvidaste tu contraseña?')
-            ->line('Olvidaste tu contraseña? No hay problema!')
-            ->action('Restablecer contraseña', url(config('app.url').route('password.reset', $this->token, false)))
-            ->line('Si no has solicitado cambiar tu contraseña, por favor ignora este mensaje.');
+            ->greeting("Hola {$notifiable->name}")
+            ->subject('Invitación a ' . config('app.name'))
+            ->line('Has sido invitado al sistema de inspecciones de Icil Icafal PZS S.A.')
+            ->action('Crear cuenta', url(config('app.url').route('accept', $notifiable->token, false)))
+            ->line('Si no has solicitado una cuenta, por favor ignora este mensaje.');
     }
 
     /**
