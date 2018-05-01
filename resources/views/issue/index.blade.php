@@ -8,6 +8,34 @@
                     Observaciones
                 @endslot
 
+                @include('flash::message')
+
+                <form class="form-inline" method="GET" action="{{ route('issue.index') }}">
+                    <div class="form-group">
+                        <label class="sr-only" for="status">Estado</label>
+                        <select class="form-control" id="status" name="status">
+                            <option disabled selected>Estado</option>
+                            @foreach($states as $status)
+                                <option value="{{ $status->id }}">
+                                    {{ __("status.{$status->name}") }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="created_by">Creado por</label>
+                        <select class="form-control" id="created_by" name="created_by">
+                            <option disabled selected>Creado por</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">
+                                    {{ $user->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-default">Filtrar</button>
+                </form>
+
                 <table class="table table-condensed table-hover">
                     <thead>
                     <tr>

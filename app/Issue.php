@@ -33,6 +33,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $subscribers
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereDescription($value)
+ * @property int $created_by
+ * @property int $assigned_to
+ * @property-read \App\User $assignedTo
+ * @property-read \App\User $createdBy
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereAssignedTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereCreatedBy($value)
  */
 class Issue extends Model
 {
