@@ -14,6 +14,7 @@ return [
     'forgot-password' => '¿Olvidaste tu contraseña?',
 
     'comment' => 'Comentar',
+    'resolve' => 'Resolver',
 
     'create' => 'Crear',
 

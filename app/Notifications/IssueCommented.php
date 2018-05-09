@@ -2,29 +2,28 @@
 
 namespace App\Notifications;
 
-use App\Issue;
+use App\Comment;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class IssueAssigned extends Notification
+class IssueCommented extends Notification
 {
     use Queueable;
 
     /**
-     * @var Issue
+     * @var Comment
      */
-    protected $issue;
+    public $comment;
 
     /**
      * Create a new notification instance.
      *
-     * @param Issue $issue
+     * @param Comment $comment
      */
-    public function __construct(Issue $issue)
+    public function __construct(Comment $comment)
     {
-        $this->issue = $issue;
+        $this->comment = $comment;
     }
 
     /**
@@ -47,13 +46,11 @@ class IssueAssigned extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->greeting("Hola {$notifiable->name}")
-            ->subject("#{$this->issue->id} {$this->issue->title}")
-            ->line('has sido designado como responsable de la acción inmediata de la siguiente observación')
-            ->line("#{$this->issue->id} {$this->issue->title}")
-            ->line($this->issue->description)
-            ->action('Ver detalles', route('issue.show', $this->issue->id, true))
-            //->line('Gracias por usar nuestra aplicación!')
+            ->greeting("Hola, {$notifiable->name}")
+            ->subject("#{$this->comment->issue->id} {$this->comment->issue->title}")
+            ->line("{$this->comment->createdBy->name} comentó")
+            ->line($this->comment->description)
+            ->action('Ver detalles', route('issue.show', $this->comment->issue->id, true))
             ->salutation('Icil Icafal Proyecto Zona Sur S.A.');
     }
 

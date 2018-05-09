@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\IssueCommented;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -32,6 +33,15 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = ['created_by', 'description', 'issue_id'];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => IssueCommented::class,
+    ];
 
     /**
      * The attributes that should be mutated to dates.

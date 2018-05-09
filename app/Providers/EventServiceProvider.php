@@ -17,6 +17,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SendNewIssueNotification',
             'App\Listeners\SendNewIssueAssignedNotification'
         ],
+        'App\Events\IssueCommented' => [
+            'App\Listeners\SendIssueCommentedNotification'
+        ]
     ];
 
     /**

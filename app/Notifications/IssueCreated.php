@@ -47,12 +47,11 @@ class IssueCreated extends Notification
     public function toMail(User $notifiable)
     {
         return (new MailMessage)
-            ->greeting("Hola {$notifiable->name}")
-            ->subject("[iipzs] #{$this->issue->id} {$this->issue->title}")
-            ->line($this->issue->content)
+            ->greeting("Hola, {$notifiable->name}")
+            ->subject("#{$this->issue->id} {$this->issue->title}")
+            ->line($this->issue->description)
             ->action('Ver detalles', route('issue.show', $this->issue->id, true))
-            ->line('Gracias por usar nuestra aplicación!')
-            ->salutation('Saludos');
+            ->salutation('Icil Icafal Proyecto Zona Sur S.A.');
     }
 
     /**

@@ -28,6 +28,7 @@ class StoreComment extends FormRequest
         return [
             'description' => 'required',
             'attachment'  => 'file',
+            'action'      => 'required'
         ];
     }
 }
