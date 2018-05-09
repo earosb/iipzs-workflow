@@ -26,6 +26,9 @@
                        aria-expanded="false">Observaciones <span class="caret"></span></a>
 
                     <ul class="dropdown-menu">
+                        <li><a href="{{ route('issue.index', ['status' => [1,2]]) }}">Abiertas</a></li>
+                        <li><a href="{{ route('issue.index', ['created_by' => Auth::user()->id]) }}">Mis observaciones</a></li>
+                        <li><a href="{{ route('issue.index', ['assigned_to' => Auth::user()->id]) }}">Mis asignaciones</a></li>
                         <li><a href="{{ route('issue.index') }}">Todas</a></li>
 
 {{--                        <li><a href="/observation?by={{ auth()->id() }}">Mis Observaciones</a></li>--}}
@@ -59,9 +62,9 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ route('profile', Auth::user()) }}">Perfil</a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="{{ route('profile', Auth::user()) }}">Perfil</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
