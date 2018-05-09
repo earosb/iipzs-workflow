@@ -87,7 +87,13 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-primary">{{ __('buttons.comment') }}</button>
+                                <button name="action" value="comment" class="btn btn-primary">{{ __('buttons.comment') }}</button>
+                                @if($issue->status->name === 'open')
+                                    <button name="action" value="resolve" class="btn btn-info">{{ __('buttons.resolve') }}</button>
+                                @endif
+                                @if($issue->status->name === 'resolved')
+                                    <button name="action" value="close" class="btn btn-success">{{ __('buttons.close') }}</button>
+                                @endif
 
                                 {{--<div class="btn-group">--}}
                                 {{--<button class="btn btn-primary">{{ __('buttons.comment') }}</button>--}}
