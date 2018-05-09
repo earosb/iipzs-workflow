@@ -20,11 +20,10 @@ class IssueCommented
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Comment $comment
      */
     public function __construct(Comment $comment)
     {
-        logger('\App\Events\IssueCommented', $comment->toArray());
         $this->comment = $comment;
     }
 

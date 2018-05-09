@@ -22,7 +22,6 @@ class SendIssueCommentedNotification
 
 
         $users->each(function ($user) use ($event) {
-            logger('users', $user->toArray());
             Notification::send($user, new IssueCommented($event->comment));
         });
     }
