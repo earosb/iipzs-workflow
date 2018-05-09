@@ -33,6 +33,17 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="assigned_to">Asignada a</label>
+                        <select class="form-control" id="assigned_to" name="assigned_to">
+                            <option disabled selected>Asignada a</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">
+                                    {{ $user->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-default">Filtrar</button>
                 </form>
 

@@ -22,7 +22,11 @@ class IssueSearch
             $decorator = static::createFilterDecorator($filterName);
 
             if (static::isValidDecorator($decorator)) {
-                $query = $decorator::apply($query, $value);
+                if (is_array($value)) {
+                    $query = $decorator::apply($query, $value, true);
+                } else {
+                    $query = $decorator::apply($query, $value);
+                }
             }
 
         }

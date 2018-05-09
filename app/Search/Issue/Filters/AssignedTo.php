@@ -2,24 +2,19 @@
 
 namespace App\Search\Issue\Filters;
 
-
 use Illuminate\Database\Eloquent\Builder;
 
-class Status
+class AssignedTo
 {
     /**
      * Apply a given search value to the builder instance.
      *
      * @param Builder $builder
      * @param mixed $value
-     * @param bool $whereIn
      * @return Builder $builder
      */
-    public static function apply(Builder $builder, $value, $whereIn = false)
+    public static function apply(Builder $builder, $value)
     {
-        if ($whereIn)
-            return $builder->whereIn('status_id', $value);
-
-        return $builder->where('status_id', $value);
+        return $builder->where('assigned_to', $value);
     }
 }
