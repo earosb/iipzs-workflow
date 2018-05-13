@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreIssue;
+use App\Http\Requests\UpdateIssue;
 use App\Issue;
 use App\Search\Issue\IssueSearch;
 use App\Status;
@@ -81,5 +82,54 @@ class IssueController extends Controller
         $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
 
         return redirect()->route('issue.show', $issue->id);
+    }
+
+    /**
+     * @param Issue $issue
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(Issue $issue)
+    {
+        $types = Type::all(['id', 'name']);
+        $users = User::all(['id', 'name']);
+
+        return view('issue.edit', compact('issue', 'users', 'types'));
+    }
+
+    /**
+     * @param Issue $issue
+     * @param UpdateIssue $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Issue $issue, UpdateIssue $request)
+    {
+        $issue->update(
+            $request->except(['_method', '_token'])
+        );
+
+        flash(__('issue.updated'));
+
+        return redirect()->route('issue.show', $issue->id);
+    }
+
+    /**
+     * @param Issue $issue
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Issue $issue)
+    {
+        try {
+            $issue->delete();
+            flash(__('issue.deleted'));
+        } catch (\Exception $e) {
+            logger('\App\Http\Controllers\IssueController::destroy', [
+                'user'    => Auth::user()->id,
+                'issue'   => $issue->id,
+                'message' => $e->getMessage(),
+            ]);
+            flash(__('issue.deleted_error', ['message' => $e->getMessage()]));
+        }
+
+        return redirect()->route('issue.index');
     }
 }

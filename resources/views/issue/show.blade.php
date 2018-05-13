@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $issue->title }}</div>
-
+                    @include('flash::message')
                     <div class="panel-body">
                         <h4>{{ $issue->createdBy->name }}
                             <small>{{ $issue->created_at->format('d-m-Y h:m') }}</small>
@@ -87,12 +87,15 @@
                             </div>
 
                             <div class="form-group">
-                                <button name="action" value="comment" class="btn btn-primary">{{ __('buttons.comment') }}</button>
+                                <button name="action" value="comment"
+                                        class="btn btn-primary">{{ __('buttons.comment') }}</button>
                                 @if($issue->status->name === 'open')
-                                    <button name="action" value="resolve" class="btn btn-info">{{ __('buttons.resolve') }}</button>
+                                    <button name="action" value="resolve"
+                                            class="btn btn-info">{{ __('buttons.resolve') }}</button>
                                 @endif
                                 @if($issue->status->name === 'resolved')
-                                    <button name="action" value="close" class="btn btn-success">{{ __('buttons.close') }}</button>
+                                    <button name="action" value="close"
+                                            class="btn btn-success">{{ __('buttons.close') }}</button>
                                 @endif
 
                                 {{--<div class="btn-group">--}}
@@ -136,9 +139,26 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-sm-6">Estado</div>
-                            <div class="col-sm-6">{{ $issue->status->name }}</div>
+                            <div class="col-sm-6">{{ __('status.'. $issue->status->name) }}</div>
                         </div>
                     </li>
+                    @can('update', $issue)
+                        <li class="list-group-item">
+                            <a href="{{ route('issue.edit', $issue) }}"
+                               class="btn btn-xs btn-block btn-warning">{{ __('buttons.edit') }}</a>
+                        </li>
+                    @endcan
+                    @can('delete', $issue)
+                        <li class="list-group-item">
+                            <form method="POST" action="{{ route('issue.destroy', $issue) }}" accept-charset="UTF-8"
+                                  style="display: inline;">
+                                <input name="_method" value="DELETE" type="hidden">
+                                {{ csrf_field() }}
+                                <button onclick="return confirm({{ __('issue.delete_confirm') }})"
+                                        class="btn btn-xs btn-block btn-danger">{{ __('buttons.delete') }}</button>
+                            </form>
+                        </li>
+                    @endcan
                 </ul>
                 <div class="panel panel-default">
                     <div class="panel-heading">Usuarios suscritos</div>
