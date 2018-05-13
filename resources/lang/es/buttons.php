@@ -17,6 +17,8 @@ return [
     'resolve' => 'Resolver',
 
     'create' => 'Crear',
+    'edit'   => 'Editar',
+    'delete' => 'Eliminar',
 
     'cancel' => 'Cancelar',
 

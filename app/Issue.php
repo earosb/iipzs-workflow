@@ -4,6 +4,7 @@ namespace App;
 
 use App\Events\IssueCreated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Issue
@@ -39,9 +40,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User $createdBy
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereAssignedTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereCreatedBy($value)
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereDeletedAt($value)
  */
 class Issue extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *

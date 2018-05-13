@@ -10,9 +10,9 @@ return [
     |
     */
 
-    'new' => 'Nuevo',
-    'open' => 'Abierto',
+    'new'      => 'Nuevo',
+    'open'     => 'Abierto',
     'resolved' => 'Resuelto',
-    'closed' => 'Cerrado',
+    'closed'   => 'Cerrado',
 
 ];
