@@ -20,7 +20,11 @@ Route::post('register/{token}', 'InviteController@register')->name('register');
 Route::group(['middleware' => ['auth']], function () {
     Route::redirect('/', '/home', 301);
     Route::get('/home', 'IssueController@index')->name('home');
-    Route::get('/profile/{user}', 'ProfileController@show')->name('profile');
+
+    Route::get('/profile', 'ProfileController@show')->name('profile');
+    Route::get('/profile/edit/password', 'ProfileController@editPassword')->name('profile.password');
+    Route::post('/profile/edit/password', 'ProfileController@updatePassword')->name('profile.update-password');
+
     Route::resource('upload', 'UploadController', ['only' => ['store', 'destroy']]);
 
     Route::resource('issue', 'IssueController');

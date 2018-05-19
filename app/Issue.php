@@ -42,6 +42,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereCreatedBy($value)
  * @property string|null $deleted_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue whereDeletedAt($value)
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Issue onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Query\Builder|\App\Issue withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Issue withoutTrashed()
  */
 class Issue extends Model
 {

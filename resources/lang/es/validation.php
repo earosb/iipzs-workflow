@@ -88,6 +88,7 @@ return [
     'unique'               => 'El valor del campo :attribute ya está en uso.',
     'uploaded'             => 'El campo :attribute falló al subir.',
     'url'                  => 'El formato del campo :attribute es inválido.',
+    'password_match'       => 'El campo :attribute no coincide.',
 
     /*
     |--------------------------------------------------------------------------
@@ -118,8 +119,11 @@ return [
     */
 
     'attributes' => [
-        'email' => 'Correo electrónico',
-        'password' => 'Contraseña',
+        'email'                     => 'Correo electrónico',
+        'password'                  => 'Contraseña',
+        'old_password'              => 'contraseña actual',
+        'new_password'              => 'nueva contraseña',
+        'new_password_confirmation' => 'repetir nueva contraseña',
     ],
 
 ];
