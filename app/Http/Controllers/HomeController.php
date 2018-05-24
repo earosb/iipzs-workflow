@@ -32,35 +32,37 @@ class HomeController extends Controller
         $states = Status::withCount('issues')
             ->get(['name']);
 
-        $chartData = [
-            'data'    => [
-                'labels'   => $issues->keys(),//$states->pluck('name'),
-                'datasets' => [
-                    [
-                        'label'           => '# de observaciones',
-                        'data'            => $issues->values(),//$states->pluck('issues_count'),
-                        'fill'            => true,
-                        'backgroundColor' => [
-                            'rgba(48, 151, 209, 1)',
-                            'rgba(142, 180, 203, 1)',
-                            'rgba(42, 178, 123, 1)',
-                            'rgba(203, 185, 86, 1)',
-                        ],
-                        'borderColor'     => 'rgba(245, 248, 250, 0.5)',
-                    ]
+        if ($issues->count() > 0) {
+            $chartData = [
+                'data'    => [
+                    'labels'   => $issues->keys(),//$states->pluck('name'),
+                    'datasets' => [
+                        [
+                            'label'           => '# de observaciones',
+                            'data'            => $issues->values(),//$states->pluck('issues_count'),
+                            'fill'            => true,
+                            'backgroundColor' => [
+                                'rgba(48, 151, 209, 1)',
+                                'rgba(142, 180, 203, 1)',
+                                'rgba(42, 178, 123, 1)',
+                                'rgba(203, 185, 86, 1)',
+                            ],
+                            'borderColor'     => 'rgba(245, 248, 250, 0.5)',
+                        ]
+                    ],
                 ],
-            ],
-            'options' => [
-                'responsive' => true,
-                'legend'     => [
-                    'position' => 'right',
-                ],
+                'options' => [
+                    'responsive' => true,
+                    'legend'     => [
+                        'position' => 'right',
+                    ],
 //                'title'      => [
 //                    'display' => false,
 //                    'text'    => 'Legend Position: ',
 //                ]
-            ]
-        ];
+                ]
+            ];
+        } else $chartData = null;
 
         return view('home', compact('myIssues', 'lastComments', 'states', 'chartData'));
     }

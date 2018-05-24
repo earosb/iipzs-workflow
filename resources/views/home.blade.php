@@ -10,17 +10,19 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Esta semana</div>
+                    @if($chartData)
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Esta semana</div>
 
-                        <div class="panel-body">
-                            <basic-chart v-bind:height="'120px'"
-                                         v-bind:type="'pie'"
-                                         v-bind:data="{{  json_encode($chartData['data']) }}"
-                                         v-bind:options="{{  json_encode($chartData['options']) }}"
-                            ></basic-chart>
+                            <div class="panel-body">
+                                <basic-chart v-bind:height="'120px'"
+                                             v-bind:type="'pie'"
+                                             v-bind:data="{{  json_encode($chartData['data']) }}"
+                                             v-bind:options="{{  json_encode($chartData['options']) }}"
+                                ></basic-chart>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="panel panel-default">
                         <div class="panel-heading">Mis asignaciones</div>
 
