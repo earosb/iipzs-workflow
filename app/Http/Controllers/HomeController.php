@@ -21,9 +21,9 @@ class HomeController extends Controller
 
         $lastComments = Comment::orderBy('created_at', 'desc')->take(10)->get();
 
-        $issues = Issue::where('update_at', '>=', now()->startOfWeek())
+        $issues = Issue::where('updated_at', '>=', now()->startOfWeek())
             ->orderBy('status_id')
-            ->get(['id', 'status_id', 'update_at'])
+            ->get(['id', 'status_id', 'updated_at'])
             ->groupBy('status.name')
             ->mapWithKeys(function ($item, $key) {
                 return [__("status.{$key}") => $item->count()];
