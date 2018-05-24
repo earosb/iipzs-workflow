@@ -16,6 +16,7 @@ Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('app-label', require('./components/Label.vue'));
 Vue.component('new-comment', require('./components/NewComment.vue'));
+Vue.component('basic-chart', require('./components/Charts/Chart'));
 
 // Vue.component('obs-attach', require('./components/ObsAttach.vue'));
 // Vue.component('subscribers-input', require('./components/SubscribersInput.vue'));

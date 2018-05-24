@@ -18,8 +18,8 @@ Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::post('register/{token}', 'InviteController@register')->name('register');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::redirect('/', '/home', 301);
-    Route::get('/home', 'IssueController@index')->name('home');
+    Route::redirect('/', 'home', 301);
+    Route::get('home', 'HomeController')->name('home');
 
     Route::get('/profile', 'ProfileController@show')->name('profile');
     Route::get('/profile/edit/password', 'ProfileController@editPassword')->name('profile.password');

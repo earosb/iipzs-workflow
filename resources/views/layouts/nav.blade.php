@@ -18,33 +18,36 @@
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            @auth
+        @auth
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                &nbsp;<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Observaciones <span class="caret"></span></a>
+                <ul class="nav navbar-nav">
+                    &nbsp;<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Observaciones <span class="caret"></span></a>
 
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('issue.index', ['status' => [1,2]]) }}">Abiertas</a></li>
-                        <li><a href="{{ route('issue.index', ['created_by' => Auth::user()->id]) }}">Creadas por mí</a></li>
-                        <li><a href="{{ route('issue.index', ['assigned_to' => Auth::user()->id]) }}">Mis observaciones</a></li>
-                        <li><a href="{{ route('issue.index') }}">Todas</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="{{ route('issue.create') }}">Nueva observación</a>
-                </li>
-            </ul>
-            @endauth
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('issue.index', ['status' => [1,2]]) }}">Abiertas</a></li>
+                            <li><a href="{{ route('issue.index', ['created_by' => Auth::user()->id]) }}">Creadas por
+                                    mí</a></li>
+                            <li><a href="{{ route('issue.index', ['assigned_to' => Auth::user()->id]) }}">Mis
+                                    observaciones</a></li>
+                            <li><a href="{{ route('issue.index') }}">Todas</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ route('issue.create') }}">Nueva observación</a>
+                    </li>
+                </ul>
+        @endauth
 
-            <!-- Right Side Of Navbar -->
+        <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                @if (Auth::guest())
+                @guest
                     <li><a href="{{ route('login') }}">Entrar</a></li>
                     {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
-                @else
+                @endguest
+                @auth
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Mantenedores <span class="caret"></span></a>
@@ -77,7 +80,7 @@
                             </li>
                         </ul>
                     </li>
-                @endif
+                @endauth
             </ul>
         </div>
     </div>
