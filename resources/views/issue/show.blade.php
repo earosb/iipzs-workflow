@@ -26,7 +26,7 @@
                                     @else
                                         <i class="glyphicon glyphicon-file"></i>
                                     @endif
-                                    <a href="/{{ $attachment->path }}" target="_blank"> {{ $attachment->name }}</a>
+                                        <a href="{{ Storage::url($attachment->path) }}" target="_blank"> {{ $attachment->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -54,7 +54,7 @@
                                         @else
                                             <i class="glyphicon glyphicon-file"></i>
                                         @endif
-                                        <a href="/{{ $attachment->path }}" target="_blank"> {{ $attachment->name }}</a>
+                                        <a href="{{ Storage::url($attachment->path) }}" target="_blank"> {{ $attachment->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
