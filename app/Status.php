@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Status
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Status extends Model
 {
+    use SoftDeletes;
+    
     const COLORS = [
         'primary' => '#3097D1;',
         'info'    => '#8eb4cb;',
