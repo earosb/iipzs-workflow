@@ -66,7 +66,7 @@ class IssueController extends Controller
             'created_by'  => Auth::user()->id,
             'assigned_to' => $request->input('assigned_to'),
             'type_id'     => $type->id,
-            'status_id'   => Status::whereName('new')->first()->id,
+            'status_id'   => Status::whereName('open')->first()->id,
             'title'       => $request->input('title'),
             'description' => $request->input('description')
         ]);

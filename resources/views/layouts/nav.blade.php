@@ -26,7 +26,7 @@
                            aria-expanded="false">Observaciones <span class="caret"></span></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('issue.index', ['status' => [1,2]]) }}">Abiertas</a></li>
+                            <li><a href="{{ route('issue.index', ['status' => 'open']) }}">Abiertas</a></li>
                             <li><a href="{{ route('issue.index', ['created_by' => Auth::user()->id]) }}">Creadas por
                                     mí</a></li>
                             <li><a href="{{ route('issue.index', ['assigned_to' => Auth::user()->id]) }}">Mis
