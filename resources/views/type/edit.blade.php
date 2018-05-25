@@ -14,7 +14,7 @@
                     <input name="_method" value="PATCH" type="hidden">
 
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-                        <label for="name" class="col-md-4 control-label">{{ __('common.name') }}</label>
+                        <label for="name" class="col-md-4 control-label">Nombre</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" id="name" name="name" value="{{ $type->name }}"
                                    autofocus>

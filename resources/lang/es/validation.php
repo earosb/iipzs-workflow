@@ -124,6 +124,8 @@ return [
         'old_password'              => 'contraseña actual',
         'new_password'              => 'nueva contraseña',
         'new_password_confirmation' => 'repetir nueva contraseña',
+        'description'               => 'descripción',
+        'assigned to'               => 'acción inmediata'
     ],
 
 ];

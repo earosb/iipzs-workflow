@@ -15,11 +15,10 @@ class Status
      * @param bool $whereIn
      * @return Builder $builder
      */
-    public static function apply(Builder $builder, $value, $whereIn = false)
+    public static function apply(Builder $builder, $value)
     {
-        if ($whereIn)
-            return $builder->whereIn('status_id', $value);
-
-        return $builder->where('status_id', $value);
+        return $builder->whereHas('status', function (Builder $q) use ($value) {
+            $q->where('status.name', $value);
+        });
     }
 }

@@ -18,9 +18,6 @@ class CommentController extends Controller
      */
     public function store(StoreComment $request, Issue $issue)
     {
-        if ($issue->comments->count() === 0)
-            $issue->update(['status_id' => Status::whereName('open')->first()->id]);
-
         $comment = Comment::create([
             'created_by'  => Auth::user()->id,
             'issue_id'    => $issue->id,
