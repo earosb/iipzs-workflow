@@ -19,6 +19,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Status whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Status whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Status whereUpdatedAt($value)
+ * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Issue[] $issues
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Status issuesCount()
+ * @method static \Illuminate\Database\Query\Builder|\App\Status onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Status whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Status withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Status withoutTrashed()
  */
 class Status extends Model
 {

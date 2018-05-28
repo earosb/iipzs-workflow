@@ -53,8 +53,9 @@
                            aria-expanded="false">Mantenedores <span class="caret"></span></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('type.index') }}">Tipos</a></li>
                             <li><a href="{{ route('user.index') }}">Usuarios</a></li>
+                            <li><a href="{{ route('type.index') }}">Tipos</a></li>
+                            <li><a href="{{ route('resource.index') }}">Recursos</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

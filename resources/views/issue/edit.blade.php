@@ -8,14 +8,15 @@
                     Observaciones
                 @endslot
 
-                <form class="form-horizontal" method="POST" action="{{ route('issue.update', $issue->id) }}"
-                      enctype="multipart/form-data">
-                    <input name="_method" value="PATCH" type="hidden">
-                    {{ csrf_field() }}
+                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-1">
 
-                    <div class="form-group {{ $errors->has('type') ? 'has-error' : ''}}">
-                        <label for="type" class="col-md-4 control-label">Tipo</label>
-                        <div class="col-md-6">
+                    <form method="POST" action="{{ route('issue.update', $issue->id) }}"
+                          enctype="multipart/form-data">
+                        <input name="_method" value="PATCH" type="hidden">
+                        {{ csrf_field() }}
+
+                        <div class="form-group {{ $errors->has('type') ? 'has-error' : ''}}">
+                            <label for="type">Tipo</label>
                             <div class="btn-group btn-group-justified" data-toggle="buttons">
                                 @foreach($types as $type)
                                     <label class="btn btn-default @if($issue->type->id === $type->id) active @endif">
@@ -25,39 +26,34 @@
                                     </label>
                                 @endforeach
                             </div>
-                            @if ($errors->has('type'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('type') }}</strong>
-                                </span>
-                            @endif
+                            {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
                         </div>
-                    </div>
 
-                    <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
-                        <label for="title" class="col-md-4 control-label">Título</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" id="title" name="title" value="{{ $issue->title }}"
+                        <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
+                            <label for="title">Título</label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                   value="{{ $issue->title }}"
                                    autofocus>
-                            @if ($errors->has('title'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('title') }}</strong>
-                                </span>
-                            @endif
+                            {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
                         </div>
-                    </div>
 
-                    <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
-                        <label for="description" class="col-md-4 control-label">Descripción</label>
-                        <div class="col-md-6">
-                            <textarea name="description" id="description" class="form-control" cols="30"
-                                      rows="10">{{ $issue->description }}</textarea>
+                        <div class="form-group {{ $errors->has('resources') ? 'has-error' : ''}}">
+                            <label for="title">Recursos <span class="text-muted">(opcional)</span></label>
+                            <app-select name="resources" :multiple="true"
+                                        :selected="{{ json_encode($selectedResources->toArray()) }}"
+                                        :options="{{ json_encode($resources->toArray()) }}"></app-select>
+                            {!! $errors->first('resources', '<p class="help-block">:message</p>') !!}
+                        </div>
+
+                        <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" id="description" class="form-control"
+                                      rows="5">{{ $issue->description }}</textarea>
                             {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                         </div>
-                    </div>
 
-                    <div class="form-group {{ $errors->has('assigned_to') ? 'has-error' : ''}}">
-                        <label for="assigned_to" class="col-md-4 control-label">Acción inmediata</label>
-                        <div class="col-md-6">
+                        <div class="form-group {{ $errors->has('assigned_to') ? 'has-error' : ''}}">
+                            <label for="assigned_to">Acción inmediata</label>
                             <select name="assigned_to" id="assigned_to" class="form-control">
                                 <option selected>Seleccione usuario</option>
                                 @foreach($users as $user)
@@ -65,21 +61,14 @@
                                             @if($issue->assignedTo->id === $user->id) selected @endif>{{ $user->name }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('assigned_to'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('assigned_to') }}</strong>
-                                </span>
-                            @endif
+                            {!! $errors->first('assigned_to', '<p class="help-block">:message</p>') !!}
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-4 pull-right">
-                            <input type="submit" class="btn btn-primary" value="Actualizar">
-                        </div>
-                    </div>
+                        <input type="submit" class="btn btn-primary" value="Actualizar">
 
-                </form>
+                    </form>
+
+                </div>
 
             @endcomponent
         </div>

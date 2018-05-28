@@ -23,6 +23,6 @@
     "chart.js": "^2.7.2",
     "vue-crop": "^1.0.1",
     "vue-image-crop-upload": "^2.0.1",
-    "vue-select": "github:sagalbot/vue-select"
+    "vue-select": "^2.4.0"
   }
 }

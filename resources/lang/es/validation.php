@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -12,7 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+    
     'accepted'             => 'El campo :attribute debe ser aceptado.',
     'active_url'           => 'El campo :attribute no es una URL válida.',
     'after'                => 'El campo :attribute debe ser una fecha posterior a :date.',
@@ -89,7 +89,7 @@ return [
     'uploaded'             => 'El campo :attribute falló al subir.',
     'url'                  => 'El formato del campo :attribute es inválido.',
     'password_match'       => 'El campo :attribute no coincide.',
-
+    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -100,13 +100,13 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
+    
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -117,7 +117,7 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-
+    
     'attributes' => [
         'email'                     => 'Correo electrónico',
         'password'                  => 'Contraseña',
@@ -125,7 +125,11 @@ return [
         'new_password'              => 'nueva contraseña',
         'new_password_confirmation' => 'repetir nueva contraseña',
         'description'               => 'descripción',
-        'assigned to'               => 'acción inmediata'
+        'assigned to'               => 'acción inmediata',
+        'name'                      => 'nombre',
+        'type'                      => 'tipo',
+        'title'                     => 'título',
+        'assigned_to'               => 'acción inmediata',
     ],
 
 ];

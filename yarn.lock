@@ -5938,9 +5938,9 @@ vue-loader@^12.1.1:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
-"vue-select@github:sagalbot/vue-select":
+vue-select@^2.4.0:
   version "2.4.0"
-  resolved "https://codeload.github.com/sagalbot/vue-select/tar.gz/173f0bfea09199c15d1d494d19fb92e4f10aa963"
+  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-2.4.0.tgz#ef06547fe857f3259841ab2f3d29c5d8a1e52630"
 
 vue-style-loader@^3.0.0:
   version "3.0.1"
