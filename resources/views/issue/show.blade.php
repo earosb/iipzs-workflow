@@ -6,13 +6,19 @@
             <div class="col-md-8 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $issue->title }}</div>
-                    @include('flash::message')
                     <div class="panel-body">
+                        @include('flash::message')
                         <h4>{{ $issue->createdBy->name }}
                             <small>{{ $issue->created_at->format('d-m-Y h:m') }}</small>
                         </h4>
 
                         <p>{{ $issue->description }}</p>
+
+                        @foreach($issue->resources as $resource)
+                            <div style="display: inline-block;">
+                                <span class="label label-default">{{ $resource->name }}</span>
+                            </div>
+                        @endforeach
 
                         <ul class="list-group">
                             @foreach($issue->attachments as $attachment)
@@ -26,7 +32,8 @@
                                     @else
                                         <i class="glyphicon glyphicon-file"></i>
                                     @endif
-                                        <a href="{{ Storage::url($attachment->path) }}" target="_blank"> {{ $attachment->name }}</a>
+                                    <a href="{{ Storage::url($attachment->path) }}"
+                                       target="_blank"> {{ $attachment->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
@@ -54,7 +61,8 @@
                                         @else
                                             <i class="glyphicon glyphicon-file"></i>
                                         @endif
-                                        <a href="{{ Storage::url($attachment->path) }}" target="_blank"> {{ $attachment->name }}</a>
+                                        <a href="{{ Storage::url($attachment->path) }}"
+                                           target="_blank"> {{ $attachment->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

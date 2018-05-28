@@ -3,6 +3,7 @@
         <div class="panel-heading">{{ $title }}</div>
 
         <div class="panel-body">
+            @include('flash::message')
             {{ $slot }}
         </div>
     </div>

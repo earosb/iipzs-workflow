@@ -24,7 +24,7 @@ class StoreIssue extends FormRequest
     public function rules()
     {
         return [
-            'type'        => 'exists:types,id',
+            'type'        => 'required|exists:types,id',
             'title'       => 'required',
             'description' => 'required',
             'attachment'  => 'file',

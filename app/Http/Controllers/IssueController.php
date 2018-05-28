@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIssue;
 use App\Http\Requests\UpdateIssue;
 use App\Issue;
+use App\Resource;
 use App\Search\Issue\IssueSearch;
 use App\Status;
 use App\Type;
@@ -21,27 +22,27 @@ class IssueController extends Controller
     public function index(Request $request)
     {
         $states = Status::all(['id', 'name']);
-
+        
         $users = User::all(['id', 'name']);
-
+        
         $issues = IssueSearch::apply($request)->appends($request->except(['page']));
-
+        
         return view('issue.index', compact('states', 'users', 'issues'));
     }
-
+    
     /**
      * @param Issue $issue
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Issue $issue)
     {
-        $issue->load(['createdBy', 'comments.createdBy', 'comments.issue']);
-
+        $issue->load(['createdBy', 'comments.createdBy', 'comments.issue', 'resources']);
+        
         $users = User::all('name AS label', 'id AS value')->whereNotIn('id', Auth()->id());
-
+        
         return view('issue.show', compact('issue', 'users'));
     }
-
+    
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -49,10 +50,14 @@ class IssueController extends Controller
     {
         $types = Type::all(['id', 'name']);
         $users = User::all(['id', 'name']);
-
-        return view('issue.create', compact('types', 'users'));
+        $resources = Resource::all(['id', 'name'])
+            ->map(function ($resource) {
+                return ['label' => $resource->name, 'value' => $resource->id];
+            });
+        
+        return view('issue.create', compact('types', 'users', 'resources'));
     }
-
+    
     /**
      * @param StoreIssue $request
      * @return \Illuminate\Http\RedirectResponse
@@ -61,7 +66,7 @@ class IssueController extends Controller
     {
         /** @var Type $type */
         $type = Type::findOrFail($request->input('type'));
-
+        
         $issue = Issue::create([
             'created_by'  => Auth::user()->id,
             'assigned_to' => $request->input('assigned_to'),
@@ -70,7 +75,12 @@ class IssueController extends Controller
             'title'       => $request->input('title'),
             'description' => $request->input('description')
         ]);
-
+        
+        if ($request->has('resources')) {
+            $resources = explode(',', $request->input('resources'));
+            $issue->resources()->attach($resources);
+        }
+        
         if ($request->has('attachment')) {
             $issue->attachments()->create([
                 'name'      => $request->attachment->getClientOriginalName(),
@@ -78,24 +88,34 @@ class IssueController extends Controller
                 'path'      => $request->attachment->store('attachments', 'public')
             ]);
         }
-
+        
         $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
-
+        
         return redirect()->route('issue.show', $issue->id);
     }
-
+    
     /**
      * @param Issue $issue
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Issue $issue)
     {
+        $issue->load(['createdBy', 'comments.createdBy', 'comments.issue', 'resources']);
+        
         $types = Type::all(['id', 'name']);
         $users = User::all(['id', 'name']);
-
-        return view('issue.edit', compact('issue', 'users', 'types'));
+        $resources = Resource::all(['id', 'name'])
+            ->map(function ($resource) {
+                return ['label' => $resource->name, 'value' => $resource->id];
+            });
+        
+        $selectedResources = $issue->resources->map(function ($resource) {
+            return ['label' => $resource->name, 'value' => $resource->id];
+        });
+        
+        return view('issue.edit', compact('issue', 'users', 'types', 'resources', 'selectedResources'));
     }
-
+    
     /**
      * @param Issue $issue
      * @param UpdateIssue $request
@@ -106,12 +126,17 @@ class IssueController extends Controller
         $issue->update(
             $request->except(['_method', '_token'])
         );
-
+        
+        if ($request->has('resources')) {
+            $resources = explode(',', $request->input('resources'));
+            $issue->resources()->sync($resources);
+        }
+        
         flash(__('issue.updated'));
-
+        
         return redirect()->route('issue.show', $issue->id);
     }
-
+    
     /**
      * @param Issue $issue
      * @return \Illuminate\Http\RedirectResponse
@@ -129,7 +154,7 @@ class IssueController extends Controller
             ]);
             flash(__('issue.deleted_error', ['message' => $e->getMessage()]));
         }
-
+        
         return redirect()->route('issue.index');
     }
 }

@@ -47,18 +47,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static bool|null restore()
  * @method static \Illuminate\Database\Query\Builder|\App\Issue withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Issue withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Resource[] $resources
  */
 class Issue extends Model
 {
     use SoftDeletes;
-
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = ['type_id', 'title', 'description', 'created_by', 'assigned_to', 'status_id'];
-
+    
     /**
      * The event map for the model.
      *
@@ -67,7 +68,7 @@ class Issue extends Model
     protected $dispatchesEvents = [
         'created' => IssueCreated::class,
     ];
-
+    
     /**
      * The attributes that should be mutated to dates.
      *
@@ -77,7 +78,7 @@ class Issue extends Model
         'created_at',
         'updated_at'
     ];
-
+    
     /**
      * Tipo de observación
      *
@@ -87,7 +88,7 @@ class Issue extends Model
     {
         return $this->belongsTo(Type::class);
     }
-
+    
     /**
      * Usuario creador
      *
@@ -97,7 +98,7 @@ class Issue extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
-
+    
     /**
      * Usuario asignado
      *
@@ -107,7 +108,7 @@ class Issue extends Model
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
-
+    
     /**
      * Estado de la observación
      *
@@ -117,7 +118,7 @@ class Issue extends Model
     {
         return $this->belongsTo(Status::class);
     }
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -125,7 +126,7 @@ class Issue extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
+    
     /**
      * Comentarios de una observación
      *
@@ -135,12 +136,20 @@ class Issue extends Model
     {
         return $this->hasMany(Comment::class);
     }
-
+    
     /**
      * Get all of the issues attachments.
      */
     public function attachments()
     {
         return $this->morphMany('App\Attachment', 'attachable');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function resources()
+    {
+        return $this->belongsToMany(Resource::class);
     }
 }
