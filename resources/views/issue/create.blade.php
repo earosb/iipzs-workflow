@@ -47,10 +47,10 @@
                             {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                         </div>
 
-                        <div class="form-group {{ $errors->has('attachment') ? 'has-error' : ''}}">
-                            <label for="attachment">Adjuntar archivo <span class="text-muted">(opcional)</span></label>
-                            <input name="attachment" id="attachment" type="file" class="form-control">
-                            {!! $errors->first('attachment', '<p class="help-block">:message</p>') !!}
+                        <div class="form-group {{ $errors->has('attachments') ? 'has-error' : ''}}">
+                            <label for="attachments">Adjuntar archivo <span class="text-muted">(opcional)</span></label>
+                            <input name="attachments[]" id="attachments" type="file" class="form-control" multiple>
+                            {!! $errors->first('attachments', '<p class="help-block">:message</p>') !!}
                         </div>
 
                         <div class="form-group {{ $errors->has('assigned_to') ? 'has-error' : ''}}">

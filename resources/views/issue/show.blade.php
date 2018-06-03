@@ -89,9 +89,9 @@
                             {{--<obs-attach user="{{ Auth()->user() }}"></obs-attach>--}}
                             {{--</div>--}}
 
-                            <div class="form-group {{ $errors->has('attachment') ? 'has-error' : ''}}">
-                                <input name="attachment" id="attachment" type="file" class="form-control">
-                                {!! $errors->first('attachment', '<p class="help-block">:message</p>') !!}
+                            <div class="form-group {{ $errors->has('attachments') ? 'has-error' : ''}}">
+                                <input name="attachments[]" id="attachments" type="file" class="form-control" multiple>
+                                {!! $errors->first('attachments', '<p class="help-block">:message</p>') !!}
                             </div>
 
                             <div class="form-group">

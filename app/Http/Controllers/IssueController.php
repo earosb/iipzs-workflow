@@ -81,12 +81,14 @@ class IssueController extends Controller
             $issue->resources()->attach($resources);
         }
         
-        if ($request->has('attachment')) {
-            $issue->attachments()->create([
-                'name'      => $request->attachment->getClientOriginalName(),
-                'mime_type' => $request->attachment->getClientMimeType(),
-                'path'      => $request->attachment->store('attachments', 'public')
-            ]);
+        if ($request->has('attachments')) {
+            foreach ($request->attachments as $attachment) {
+                $issue->attachments()->create([
+                    'name'      => $attachment->getClientOriginalName(),
+                    'mime_type' => $attachment->getClientMimeType(),
+                    'path'      => $attachment->store('attachments', 'public')
+                ]);
+            }
         }
         
         $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
