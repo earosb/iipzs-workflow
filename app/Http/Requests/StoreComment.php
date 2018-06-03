@@ -15,7 +15,7 @@ class StoreComment extends FormRequest
     {
         return true;
     }
-
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,11 +24,11 @@ class StoreComment extends FormRequest
     public function rules()
     {
         $issue = $this->route('issue');
-
+        
         return [
-            'description' => 'required',
-            'attachment'  => 'file',
-            'action'      => 'required'
+            'description'   => 'required',
+            'attachments.*' => 'file',
+            'action'        => 'required'
         ];
     }
 }
