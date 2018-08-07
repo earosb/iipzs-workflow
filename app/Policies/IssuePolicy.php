@@ -42,6 +42,10 @@ class IssuePolicy
      */
     public function update(User $user, Issue $issue)
     {
+        if ($issue->status->name === 'closed') {
+            return false;
+        }
+
         return $user->id === $issue->createdBy->id;
     }
 
@@ -54,6 +58,9 @@ class IssuePolicy
      */
     public function delete(User $user, Issue $issue)
     {
+        if ($issue->status->name === 'closed') {
+            return false;
+        }
         return $user->id === $issue->createdBy->id;
     }
 }
