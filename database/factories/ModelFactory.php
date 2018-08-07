@@ -16,27 +16,26 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name'           => $faker->name,
-        'email'          => $faker->unique()->safeEmail,
-        'password'       => $password ?: $password = bcrypt('secret'),
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Issue::class, function (Faker\Generator $faker) {
-
     $type = \App\Type::inRandomOrder()->first(['id']);
     $users = \App\User::inRandomOrder()->get(['id']);
     $status = \App\Status::inRandomOrder()->first(['id']);
 
     return [
-        'type_id'     => $type->id,
-        'title'       => $faker->sentence,
+        'type_id' => $type->id,
+        'title' => $faker->sentence,
         'description' => $faker->text,
-        'created_by'  => $users->random()->id,
-        'assigned_to'  => $users->random()->id,
-        'status_id'   => $status->id,
+        'created_by' => $users->random()->id,
+        'assigned_to' => $users->random()->id,
+        'status_id' => $status->id,
     ];
 });
 
@@ -54,7 +53,7 @@ $factory->define(App\Status::class, function (Faker\Generator $faker) {
 $factory->define(App\Comment::class, function (Faker\Generator $faker) {
     $user = \App\User::inRandomOrder()->first(['id']);
     return [
-        'created_by'  => $user->id,
+        'created_by' => $user->id,
         'description' => $faker->text,
     ];
 });
