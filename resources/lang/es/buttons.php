@@ -1,28 +1,19 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    |
-    |--------------------------------------------------------------------------
-    |
-    |
-    */
-
-    'login'           => 'Iniciar sesión',
+    'login' => 'Iniciar sesión',
     'forgot-password' => '¿Olvidaste tu contraseña?',
 
     'comment' => 'Comentar',
-    'resolve' => 'Resolver',
+    'resolve' => 'Precerrar',
+    'close' => 'Cerrar',
 
     'create' => 'Crear',
-    'edit'   => 'Editar',
+    'edit' => 'Editar',
     'delete' => 'Eliminar',
 
     'cancel' => 'Cancelar',
 
-    'subscribe'           => 'Suscribirme',
+    'subscribe' => 'Suscribirme',
     'cancel_subscription' => 'Cancelar suscripción',
-
 ];
