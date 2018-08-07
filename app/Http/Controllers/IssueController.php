@@ -100,7 +100,11 @@ class IssueController extends Controller
             }
         }
 
+<<<<<<< HEAD
         // $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
+=======
+        $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
+>>>>>>> 37f12b7f82906287e2f69b3b4ac645e03b7bfd16
 
         return redirect()->route('issue.show', $issue->id);
     }
