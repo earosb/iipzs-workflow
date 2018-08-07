@@ -15,7 +15,7 @@ class StoreIssue extends FormRequest
     {
         return true;
     }
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,11 +24,11 @@ class StoreIssue extends FormRequest
     public function rules()
     {
         return [
-            'type'          => 'required|exists:types,id',
-            'title'         => 'required',
-            'description'   => 'required',
+            'type' => 'required|exists:types,id',
+            'title' => 'required',
+            'description' => 'required',
             'attachments.*' => 'file',
-            'assigned_to'   => 'required|exists:users,id'
+            'assigned_to' => 'required|exists:users,id'
         ];
     }
 }

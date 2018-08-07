@@ -86,7 +86,8 @@ class IssueController extends Controller
         }
 
         if ($request->has('notify_to')) {
-            $issue->subscribers()->attach($request->input('notify_to'));
+            $subscribers = explode(',', $request->input('notify_to'));
+            $issue->subscribers()->attach($subscribers);
         }
 
         if ($request->has('attachments')) {
@@ -99,7 +100,7 @@ class IssueController extends Controller
             }
         }
 
-        $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
+        // $issue->subscribers()->attach($type->notifyByDefault->pluck('id'));
 
         return redirect()->route('issue.show', $issue->id);
     }
