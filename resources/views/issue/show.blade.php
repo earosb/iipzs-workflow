@@ -94,6 +94,12 @@
                                 {!! $errors->first('attachments', '<p class="help-block">:message</p>') !!}
                             </div>
 
+                            <div class="form-group {{ $errors->has('assigned_to') ? 'has-error' : ''}}">
+                                <label for="assigned_to">Acción inmediata</label>
+                                <app-select name="assigned_to" :multiple="false" :options="{{ json_encode($users->toArray()) }}"></app-select>
+                                {!! $errors->first('assigned_to', '<p class="help-block">:message</p>') !!}
+                            </div>
+                            
                             <div class="form-group">
                                 <button name="action" value="comment"
                                         class="btn btn-primary">{{ __('buttons.comment') }}</button>
