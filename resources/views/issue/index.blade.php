@@ -16,7 +16,7 @@
                         <select class="form-control" id="status" name="status">
                             <option disabled selected>Estado</option>
                             @foreach($states as $status)
-                                <option value="{{ $status->id }}">
+                                <option value="{{ $status->name }}">
                                     {{ __("status.{$status->name}") }}
                                 </option>
                             @endforeach
