@@ -6,14 +6,14 @@ use App\Comment;
 use App\Http\Requests\StoreComment;
 use App\Issue;
 use App\Status;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    
     /**
-     * @param StoreComment $request
      * @param Issue $issue
+     * @param StoreComment $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreComment $request, Issue $issue)
@@ -23,13 +23,13 @@ class CommentController extends Controller
             'issue_id'    => $issue->id,
             'description' => $request->input('description')
         ]);
-        
+
         if ($request->input('action') === 'resolve') {
             $issue->update(['status_id' => Status::whereName('resolved')->first()->id]);
-        } else if ($request->input('action') === 'close') {
+        } elseif ($request->input('action') === 'close') {
             $issue->update(['status_id' => Status::whereName('closed')->first()->id]);
         }
-        
+
         if ($request->has('attachments')) {
             foreach ($request->attachments as $attachment) {
                 $comment->attachments()->create([
@@ -39,10 +39,23 @@ class CommentController extends Controller
                 ]);
             }
         }
-        
-        if (!$issue->subscribers->contains(Auth::user()->id))
+
+        if ($request->has('assigned_to')) {
+            $newAssignedTo = User::find($request->input('assigned_to'));
+            if ($issue->assigned_to !== $newAssignedTo->id) {
+                Comment::create([
+                    'created_by'  => Auth::user()->id,
+                    'issue_id'    => $issue->id,
+                    'description' => "Cambió usuario responsable ({$issue->assignedTo->name} > {$newAssignedTo->name})"
+                ]);
+                $issue->update(['assigned_to' => $request->input('assigned_to')]);
+            }
+        }
+
+        if (!$issue->subscribers->contains(Auth::user()->id)) {
             $issue->subscribers()->attach(Auth::user()->id);
-        
+        }
+
         return redirect()->route('issue.show', $issue->id);
     }
 }
