@@ -11,7 +11,9 @@ class DatabaseDevTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class)->create(['name' => 'User Developer', 'email' => 'dev@local', 'password' => bcrypt('secret')]);
+        $user = factory(App\User::class)->create(['name' => 'User Developer', 'email' => 'dev@local', 'password' => bcrypt('secret')]);
+        $user->assignRole(['admin', 'supervisor', 'worker', ]);
+
         factory(App\User::class, 25)->create();
 
         factory(App\Issue::class, 50)->create()->each(function ($i) {

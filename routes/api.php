@@ -12,7 +12,6 @@
 */
 
 Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
-
     /**
      * JWT auth
      */
@@ -23,4 +22,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
         Route::post('me', 'Api\v1\AuthController@me');
     });
 
+    Route::group(['middleware' => ['jwt.auth']], function () {
+        Route::resource('issue', 'Api\v1\IssueController');
+        Route::resource('issue/{issue}/comment', 'Api\v1\CommentController', ['only' => ['store']]);
+    });
 });

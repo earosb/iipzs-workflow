@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="col-md-8 col-md-offset-1 col-sm-8 col-xs-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $issue->title }}</div>
                     <div class="panel-body">
@@ -44,7 +44,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4>{{ $comment->createdBy->name }}
-                                <small>{{ $comment->created_at->format('d-m-Y h:m') }}</small>
+                                <small>{{ $comment->created_at->diffForHumans() }}</small>
                             </h4>
 
                             <p>{{ $comment->description }}</p>
@@ -107,10 +107,10 @@
                                     <button name="action" value="resolve"
                                             class="btn btn-info">{{ __('buttons.resolve') }}</button>
                                 @endif
-                                @if($issue->status->name === 'resolved')
+                                @hasanyrole('supervisor|admin')
                                     <button name="action" value="close"
                                             class="btn btn-success">{{ __('buttons.close') }}</button>
-                                @endif
+                                @endhasanyrole
 
                                 {{--<div class="btn-group">--}}
                                 {{--<button class="btn btn-primary">{{ __('buttons.comment') }}</button>--}}
@@ -136,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-4 col-xs-4">
                 <ul class="list-group">
                     <li class="list-group-item">
                         <div class="row">

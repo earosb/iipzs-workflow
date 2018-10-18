@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
 use App\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -36,6 +38,26 @@ class UserController extends Controller
             'email'    => $request->input('email'),
             'password' => bcrypt(str_random(8)),
         ]);
+        return redirect()->route('user.index');
+    }
+
+    /**
+     *
+     */
+    public function edit(User $user)
+    {
+        $roles = Role::all(['id', 'name']);
+
+        return view('user.edit', compact('user', 'roles'));
+    }
+
+    /**
+     *
+     */
+    public function update(User $user, Request $request)
+    {
+        $user->syncRoles($request->rol);
+
         return redirect()->route('user.index');
     }
 }

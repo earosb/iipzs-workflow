@@ -18,7 +18,8 @@
                     <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Correo electrónico</th>
+                        <th class="hidden-xs">Correo electrónico</th>
+                        <th>Rol</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -28,21 +29,20 @@
                             <td>
                                 {{ $user->name }}
                             </td>
-                            <td>
+                            <td class="hidden-xs">
                                 {{ $user->email }}
                             </td>
+                            <td>
+                                @if($user->roles->count() > 0)
+                                    {{ __('roles.'.$user->roles->first()->name) }}
+                                @else
+                                    Usuario sin rol asignado
+                                @endif
+                            </td>
                             <td class="text-right">
-                                <a href="{{ route('password.request') }}" class="btn btn-sm btn-default"><span
-                                            class="glyphicon glyphicon-edit"></span></a>
-                                {{--<form method="POST" action="{{ route('user.destroy', $user->id) }}"--}}
-                                      {{--style="display:inline">--}}
-                                    {{--{{ csrf_field() }}--}}
-                                    {{--<input name="_method" value="DELETE" type="hidden">--}}
-                                    {{--<button class="btn btn-sm btn-danger" type="submit">--}}
-                                        {{--<span class="glyphicon glyphicon-trash" aria-hidden="true"--}}
-                                              {{--title="Eliminar"></span>--}}
-                                    {{--</button>--}}
-                                {{--</form>--}}
+                                <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-default">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
