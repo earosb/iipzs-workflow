@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     |
@@ -12,7 +11,6 @@ return [
 
     'new'      => 'Nuevo',
     'open'     => 'Abierto',
-    'resolved' => 'Resuelto',
+    'resolved' => 'Precierre',
     'closed'   => 'Cerrado',
-
 ];

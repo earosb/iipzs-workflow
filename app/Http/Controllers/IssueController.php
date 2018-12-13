@@ -67,16 +67,17 @@ class IssueController extends Controller
      */
     public function store(StoreIssue $request)
     {
+        return $request->all();
         /** @var Type $type */
         $type = Type::findOrFail($request->input('type'));
 
         /** @var Issue $issue */
         $issue = Issue::create([
-            'created_by' => Auth::user()->id,
+            'created_by'  => Auth::user()->id,
             'assigned_to' => $request->input('assigned_to'),
-            'type_id' => $type->id,
-            'status_id' => Status::whereName('open')->first()->id,
-            'title' => $request->input('title'),
+            'type_id'     => $type->id,
+            'status_id'   => Status::whereName('open')->first()->id,
+            'title'       => $request->input('title'),
             'description' => $request->input('description')
         ]);
 
@@ -93,9 +94,9 @@ class IssueController extends Controller
         if ($request->has('attachments')) {
             foreach ($request->attachments as $attachment) {
                 $issue->attachments()->create([
-                    'name' => $attachment->getClientOriginalName(),
+                    'name'      => $attachment->getClientOriginalName(),
                     'mime_type' => $attachment->getClientMimeType(),
-                    'path' => $attachment->store('attachments', 'public')
+                    'path'      => $attachment->store('attachments', 'public')
                 ]);
             }
         }
@@ -159,8 +160,8 @@ class IssueController extends Controller
             flash(__('issue.deleted'));
         } catch (\Exception $e) {
             logger('\App\Http\Controllers\IssueController::destroy', [
-                'user' => Auth::user()->id,
-                'issue' => $issue->id,
+                'user'    => Auth::user()->id,
+                'issue'   => $issue->id,
                 'message' => $e->getMessage(),
             ]);
             flash(__('issue.deleted_error', ['message' => $e->getMessage()]));
