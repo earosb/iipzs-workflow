@@ -48,6 +48,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Issue withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Issue withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Resource[] $resources
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Issue query()
  */
 class Issue extends Model
 {

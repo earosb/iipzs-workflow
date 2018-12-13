@@ -8,7 +8,7 @@
                     Observaciones
                 @endslot
 
-                <div class="col-sm-8 col-sm-offset-2 col-lg-8 col-lg-offset-2">
+                <div class="col-sm-10 col-sm-offset-1">
 
                     <form method="POST" action="{{ route('issue.store') }}"
                           enctype="multipart/form-data">

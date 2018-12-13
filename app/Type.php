@@ -19,6 +19,9 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $notifyByDefault
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Issue[] $issue
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Type newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Type newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Type query()
  */
 class Type extends Model
 {

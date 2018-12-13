@@ -25,6 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Attachment wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Attachment whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Attachment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Attachment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Attachment query()
  */
 class Attachment extends Model
 {

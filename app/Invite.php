@@ -23,6 +23,9 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Invite whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Invite whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Invite newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Invite newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Invite query()
  */
 class Invite extends Model
 {

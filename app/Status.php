@@ -28,6 +28,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Status whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Status withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Status withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Status newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Status newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Status query()
  */
 class Status extends Model
 {

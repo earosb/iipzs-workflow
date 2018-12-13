@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Resource whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Resource whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Resource newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Resource newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Resource query()
  */
 class Resource extends Model
 {

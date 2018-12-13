@@ -149,10 +149,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        // 
 
         /*
          * Application Service Providers...
