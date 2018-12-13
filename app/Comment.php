@@ -5,29 +5,6 @@ namespace App;
 use App\Events\IssueCommented;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Comment
- *
- * @property int $id
- * @property int $created_by
- * @property string $description
- * @property int $issue_id
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Attachment[] $attachments
- * @property-read \App\User $createdBy
- * @property-read \App\Issue $issue
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereIssueId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereUpdatedAt($value)
- * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment query()
- */
 class Comment extends Model
 {
     /**
