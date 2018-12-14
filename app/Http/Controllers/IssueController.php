@@ -10,7 +10,6 @@ use App\Search\Issue\IssueSearch;
 use App\Status;
 use App\Type;
 use App\User;
-use Auth;
 use Illuminate\Http\Request;
 
 class IssueController extends Controller
@@ -69,25 +68,25 @@ class IssueController extends Controller
     {
         return $request->all();
         /** @var Type $type */
-        $type = Type::findOrFail($request->input('type'));
+        $type = Type::findOrFail($request->type);
 
         /** @var Issue $issue */
         $issue = Issue::create([
-            'created_by'  => Auth::user()->id,
-            'assigned_to' => $request->input('assigned_to'),
+            'created_by'  => auth()->id(),
+            'assigned_to' => $request->assigned_to,
             'type_id'     => $type->id,
             'status_id'   => Status::whereName('open')->first()->id,
-            'title'       => $request->input('title'),
-            'description' => $request->input('description')
+            'title'       => $request->title,
+            'description' => $request->description
         ]);
 
         if ($request->has('resources')) {
-            $resources = explode(',', $request->input('resources'));
+            $resources = explode(',', $request->resources);
             $issue->resources()->attach($resources);
         }
 
         if ($request->has('notify_to')) {
-            $subscribers = explode(',', $request->input('notify_to'));
+            $subscribers = explode(',', $request->notify_to);
             $issue->subscribers()->attach($subscribers);
         }
 
@@ -160,7 +159,7 @@ class IssueController extends Controller
             flash(__('issue.deleted'));
         } catch (\Exception $e) {
             logger('\App\Http\Controllers\IssueController::destroy', [
-                'user'    => Auth::user()->id,
+                'user'    => auth()->id(),
                 'issue'   => $issue->id,
                 'message' => $e->getMessage(),
             ]);
