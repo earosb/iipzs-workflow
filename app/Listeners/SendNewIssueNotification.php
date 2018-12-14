@@ -17,7 +17,8 @@ class SendNewIssueNotification
      */
     public function handle(Event $event)
     {
-        $users = $event->issue->type->notifyByDefault;
+        $users = $event->issue->subscribers;
+        
         Notification::send($users, new IssueCreated($event->issue));
     }
 }
