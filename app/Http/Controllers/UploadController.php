@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
-    public function store(Request $request)
+    /**
+     * 
+     */
+    public function __invoke(Request $request)
     {
         $this->validate($request, [
             'attachment' => 'required'
@@ -16,10 +19,13 @@ class UploadController extends Controller
         return response()->json([
             'name'      => $request->attachment->getClientOriginalName(),
             'mime_type' => $request->attachment->getClientMimeType(),
-            'path'      => $request->attachment->store('attachments', 'public')
+            'path'      => $request->attachment->store('tmp', 'public')
         ]);
     }
 
+    /**
+     * 
+     */
     public function destroy($path)
     {
         $deleted = Storage::delete('public/attachments/' . $path);

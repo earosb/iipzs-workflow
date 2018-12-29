@@ -67,11 +67,7 @@
                                 {!! $errors->first('notify_to', '<p class="help-block">:message</p>') !!}
                             </div>
 
-                            <div class="form-group {{ $errors->has('attachments') ? 'has-error' : ''}}">
-                                <label for="attachments">Adjuntar archivo <small class="text-muted">(opcional)</small></label>
-                                <input name="attachments[]" id="attachments" type="file" class="form-control" multiple>
-                                {!! $errors->first('attachments', '<p class="help-block">:message</p>') !!}
-                            </div>
+                            <obs-attach :attach="{{ json_encode(old('attachments')) }}"></obs-attach>
 
                         </div>
 

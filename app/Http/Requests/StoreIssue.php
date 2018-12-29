@@ -27,7 +27,6 @@ class StoreIssue extends FormRequest
             'type' => 'required|exists:types,id',
             'title' => 'required',
             'description' => 'required',
-            'attachments.*' => 'file',
             'assigned_to' => 'required|exists:users,id'
         ];
     }
