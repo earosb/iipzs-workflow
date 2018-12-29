@@ -17,7 +17,7 @@ Vue.component('app-label', require('./components/Label.vue'));
 Vue.component('basic-chart', require('./components/Charts/Chart'));
 Vue.component('app-select', require('./components/SelectInput'));
 
-// Vue.component('obs-attach', require('./components/ObsAttach.vue'));
+Vue.component('obs-attach', require('./components/ObsAttach.vue'));
 // Vue.component('subscribers-input', require('./components/SubscribersInput.vue'));
 
 const app = new Vue({

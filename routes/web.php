@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile/edit/password', 'ProfileController@editPassword')->name('profile.password');
     Route::post('/profile/edit/password', 'ProfileController@updatePassword')->name('profile.update-password');
 
-    Route::resource('upload', 'UploadController', ['only' => ['store', 'destroy']]);
+    Route::post('upload', 'UploadController');
 
     Route::resource('issue', 'IssueController');
     Route::resource('issue/{issue}/comment', 'CommentController', ['only' => ['store']]);

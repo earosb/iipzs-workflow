@@ -66,7 +66,6 @@ class IssueController extends Controller
      */
     public function store(StoreIssue $request)
     {
-        return $request->all();
         /** @var Type $type */
         $type = Type::findOrFail($request->type);
 
@@ -92,10 +91,11 @@ class IssueController extends Controller
 
         if ($request->has('attachments')) {
             foreach ($request->attachments as $attachment) {
+                // TODO Sacar adjuntos de carpeta tmp
                 $issue->attachments()->create([
-                    'name'      => $attachment->getClientOriginalName(),
-                    'mime_type' => $attachment->getClientMimeType(),
-                    'path'      => $attachment->store('attachments', 'public')
+                    'name'      => $attachment['name'],
+                    'mime_type' => $attachment['mime_type'],
+                    'path'      => $attachment['path']
                 ]);
             }
         }
