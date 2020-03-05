@@ -32,7 +32,7 @@
                             @foreach ($roles as $rol)
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="rol" value="{{$rol->id}}"> {{$rol->name}}
+                                    <input type="radio" name="rol" value="{{$rol->id}}" @if($user->hasRole($rol->name)) checked @endif> {{ __('roles.'.$rol->name) }}
                                 </label>
                             </div>
                             @endforeach

@@ -18,5 +18,6 @@ return [
     'immediate_action' => 'Asignar acción inmediata',
 
     'name' => 'Nombre',
+    'roles' => 'Roles',
 
 ];
