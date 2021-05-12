@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "bulma": "^0.4.3",
-    "chart.js": "^2.7.2",
+    "chart.js": "^2.9.4",
     "vue-crop": "^1.0.1",
     "vue-image-crop-upload": "^2.0.1",
     "vue-select": "^2.4.0"
